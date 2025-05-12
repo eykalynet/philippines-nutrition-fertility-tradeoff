@@ -1,0 +1,123 @@
+% AER-Article.tex for AEA last revised 22 June 2011
+\documentclass[AER]{AEA}
+
+% The mathtime package uses a Times font instead of Computer Modern.
+% Uncomment the line below if you wish to use the mathtime package:
+%\usepackage[cmbold]{mathtime}
+% Note that miktex, by default, configures the mathtime package to use commercial fonts
+% which you may not have. If you would like to use mathtime but you are seeing error
+% messages about missing fonts (mtex.pfb, mtsy.pfb, or rmtmi.pfb) then please see
+% the technical support document at http://www.aeaweb.org/templates/technical_support.pdf
+% for instructions on fixing this problem.
+
+% Note: you may use either harvard or natbib (but not both) to provide a wider
+% variety of citation commands than latex supports natively. See below.
+
+% Uncomment the next line to use the natbib package with bibtex
+\usepackage{natbib}
+
+% Uncomment the next line to use the harvard package with bibtex
+%\usepackage[abbr]{harvard}
+
+% This command determines the leading (vertical space between lines) in draft mode
+% with 1.5 corresponding to "double" spacing.
+\draftSpacing{1.5}
+
+
+% tightlist command for lists without linebreak
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+% Add imagehandling
+
+
+
+
+\usepackage{hyperref}
+
+\begin{document}
+
+
+\title{Nutritional Deficits and the Quantity-Quality Trade-off: Evidence
+from an Exogenous Fertility Shock in Low-Income Urban Settings in the
+Philippines}
+\shortTitle{A shorter title}
+% \author{Author1 and Author2\thanks{Surname1: affiliation1, address1, email1.
+% Surname2: affiliation2, address2, email2. Acknowledgements}}
+
+
+\author{
+  Erika Salvador\\
+  Caroline Theoharides,\thanks{
+  Salvador: Amherst
+College, \href{mailto:esalvador28@amherst.edu}{esalvador28@amherst.edu}.
+  Theoharides: Amherst
+College, \href{mailto:ctheoharides@amherst.edu}{ctheoharides@amherst.edu}.
+  Acknowledgements
+}
+}
+
+\date{\today}
+\pubMonth{05}
+\pubYear{2025}
+\pubVolume{1}
+\pubIssue{1}
+\JEL{A10, A11}
+\Keywords{first keyword, second keyword}
+
+\begin{abstract}
+Abstract goes here
+\end{abstract}
+
+
+\maketitle
+
+\section{First Section in Body}
+
+Sample figure:
+
+\begin{figure}
+Figure here.
+
+\caption{Caption for figure below.}
+\begin{figurenotes}
+Figure notes without optional leadin.
+\end{figurenotes}
+\begin{figurenotes}[Source]
+Figure notes with optional leadin (Source, in this case).
+\end{figurenotes}
+\end{figure}
+
+Sample table:
+
+\begin{table}
+\caption{Caption for table above.}
+
+\begin{tabular}{lll}
+& Heading 1 & Heading 2 \\
+Row 1 & 1 & 2 \\
+Row 2 & 3 & 4%
+\end{tabular}
+\begin{tablenotes}
+Table notes environment without optional leadin.
+\end{tablenotes}
+\begin{tablenotes}[Source]
+Table notes environment with optional leadin (Source, in this case).
+\end{tablenotes}
+\end{table}
+
+References here (manual or bibTeX). If you are using bibTeX, add your
+bib file name in place of BibFile in the bibliography command. \% Remove
+or comment out the next two lines if you are not using bibtex.
+
+\bibliographystyle{aea}
+\bibliography{references}
+
+\% The appendix command is issued once, prior to all appendices, if any.
+\appendix
+
+\section{Mathematical Appendix}
+
+
+\end{document}
