@@ -50,25 +50,41 @@ Context}
 
 \author{
   Erika Salvador\\
-  Caroline Theoharides,\thanks{
+  Caroline Theoharides\thanks{
   Salvador: Amherst
 College, \href{mailto:esalvador28@amherst.edu}{esalvador28@amherst.edu}.
   Theoharides: Amherst
 College, \href{mailto:ctheoharides@amherst.edu}{ctheoharides@amherst.edu}.
-  Acknowledgements
+  This research was made possible by the Schupf Fellowship at Amherst
+  College. I am indebted to my faculty adviser, Professor Caroline
+  Theoharides, for her mentorship and support throughout the development
+  of this project. I also wish to thank Faculty Director Professor
+  Amelie Hastie and the campus partners whose institutional support
+  enabled this work. I am further grateful to the Departments of
+  Economics and Mathematics \& Statistics for their academic support.
+  The views expressed and any errors contained herein are entirely my
+  own responsibility.
 }
 }
 
 \date{\today}
-\pubMonth{05}
+\pubMonth{06}
 \pubYear{2025}
 \pubVolume{1}
 \pubIssue{1}
-\JEL{A10, A11}
-\Keywords{first keyword, second keyword}
+\JEL{J13, I15, O15}
+\Keywords{fertility shocks, child nutrition, quantity-quality
+trade-off, urban poverty, Philippines}
 
 \begin{abstract}
-Abstract goes here
+This paper examines whether increased fertility affects early-life
+nutritional outcomes in low-income urban households. I exploit a natural
+experiment created by a 1990 policy in Manila, Philippines, which banned
+modern contraceptives from city-run health facilities. Using a
+difference-in-differences framework and nationally representative data
+from the Philippine Demographic and Health Surveys, I estimate the
+reduced-form impact of the policy on child height-for-age and
+weight-for-height. {[}Will add more after data analysis{]}
 \end{abstract}
 
 
@@ -76,112 +92,111 @@ Abstract goes here
 
 \section{Introduction}
 
-The quantity--quality trade-off is one of the most influential ideas in
-the economics of the family. This framework, introduced by Becker
-\citep{becker1960economic, becker1991allocation}, asserts that parents
-who have more children must allocate fewer resources to each child.
-Constraints on income and attention lead to reductions in per-child
-investments, especially in settings where public provision of services
-is weak or inconsistent. The trade-off helps explain long-run trends in
-fertility decline, human capital accumulation, and intergenerational
-poverty in low- and middle-income countries (LMICs)
-\citep{rosenzweig1980testing, schwarze2003does}.
+The trade-off between child quantity and child quality is a foundational
+concept in the economics of the family. First articulated by
+\citet{becker1960economic} and extended in subsequent models of
+household behavior \citep{beckerlewis1973, beckertomes1976}, this
+framework posits that parents allocate finite resources---both financial
+and non-financial---across children. An increase in fertility reduces
+the resources available per child and, under binding constraints, may
+lead to lower investments in health, education, and other forms of human
+capital. This mechanism has served as an explanatory model for changes
+in fertility behavior and the evolution of population structures in low-
+and middle-income countries.
 
-Despite this theoretical foundation, most empirical tests of the
-trade-off have prioritized educational outcomes as the primary measure
-of child ``quality.'' Studies often rely on proxies such as school
-enrollment, standardized test scores, or years of completed schooling
-\citep{black2005more, angrist2010effects}. These indicators indeed
-encapsulate important aspects of human capital formation, yet they
-obscure other equally vital dimensions. Among these, nutrition stands
-out as both foundational and predictive. Adequate nutrition supports
-cognitive development and raises productivity later in life
-\citep{hoddinott2013adult}. Children who experience chronic
-undernutrition face biological constraints that limit their ability to
-benefit from schooling, regardless of enrollment status or household
-income \citep{grantham2007development}. Analyses that exclude
-nutritional outcomes therefore risk understating the full scope of the
-quantity--quality trade-off.
+Empirical investigations of the quantity--quality trade-off have focused
+primarily on educational outcomes. Studies in both high-income and
+low-income settings have examined the effects of fertility on school
+enrollment, grade progression, test scores, and completed years of
+schooling
+\citep{rosenzweig1980testing, black2005more, angrist2010effects}. These
+outcomes serve as accessible proxies for long-run human capital
+accumulation, but they represent only one dimension of child quality.
+Other outcomes, such as nutritional status, are early-onset or
+biologically constrained. They also tend to be less responsive to
+remediation later in life. A child who suffers from chronic malnutrition
+may exhibit permanently reduced cognitive capacity and face limits in
+physical development that affect long-run productivity regardless of
+subsequent educational access
+\citep{hoddinott2013adult, grantham2007development}.
 
-This paper addresses this gap by studying how an exogenous increase in
-fertility affected child nutrition in the Philippines. In 1990, the
-mayor of Manila issued an executive order that prohibited modern
-contraceptives in the city's public health system. Health centers could
-no longer distribute birth control pills, condoms, or IUDs. Local
-officials also removed family planning materials and instructed
-providers to offer only natural methods. Because the national government
-did not impose similar restrictions, this policy created a natural
-experiment. Poor families in Manila experienced a sudden reduction in
-access to contraceptive services, while other urban households in
-comparable regions retained access \citep{dumas2019fertility}.
+The exclusion of nutritional outcomes from much of the empirical
+literature leaves an important dimension of the trade-off untested.
+Nutritional investments in early childhood are essential to early
+childhood development and long-term outcomes
+\citep{victora2008maternal, hoddinott2013adult}. They shape brain
+development, immune system functioning, and physical stature, and they
+have been shown to predict later-life earnings and health outcomes
+across a wide range of settings
+\citep{grantham2007development, alderman2006long}. The biological
+irreversibility of early-life nutritional deficits further distinguishes
+them from other forms of investment. Educational deficits may be
+partially remediable; nutritional failures often are not. A credible
+estimate of the trade-off between fertility and child quality must
+account for nutrition if it aims to assess the full set of consequences
+associated with fertility shocks.
 
-I use this policy discontinuity to examine the relationship between
-fertility and child nutrition. The analysis draws on multiple waves of
-the Philippine Demographic and Health Surveys (DHS), which offer
-nationally representative data on household structure, maternal
-characteristics, and child anthropometrics. I focus on stunting (low
-height-for-age) and wasting (low weight-for-height) as outcome
-variables. These indicators capture long-term and short-term nutritional
-stress, respectively, and predict later-life productivity, disease risk,
-and mortality \citep{victora2008maternal}.
+This study addresses this gap by examining the nutritional effects of a
+localized, exogenous increase in fertility in the Philippines. In 1990,
+the mayor of Manila implemented an executive policy that prohibited the
+provision of modern contraceptives in all city-run health facilities.
+The order removed access to pills, condoms, intrauterine devices, and
+related public health materials and instructed healthcare providers to
+offer only natural family planning methods. This policy remained in
+place for nearly a decade and affected only the jurisdiction of the
+Manila city government. The national government did not implement a
+comparable restriction, and surrounding cities within Metro Manila
+continued to provide access to modern contraceptives. The policy thus
+created a spatial and temporal discontinuity in contraceptive access
+that was uncorrelated with underlying fertility preferences or
+concurrent shifts in household income or governance. As a result, the
+Manila ban serves as a quasi-experimental source of variation in
+fertility exposure among poor urban households.
 
-The empirical strategy proceeds in three steps. First, I replicate prior
-work to confirm that the contraceptive ban increased fertility among
-affected women \citep{dumas2019fertility}. Second, I estimate
-reduced-form effects of exposure to the policy on child nutrition.
-Third, I examine heterogeneity by maternal education, household wealth,
-and access to prenatal care. Families with fewer resources may face
-tighter constraints when household size increases. If the
-quantity--quality trade-off holds in the nutritional domain, then
-children in these households should face a higher risk of malnutrition.
+I use this natural experiment to estimate the causal effect of increased
+fertility on child nutrition. The analysis relies on nationally
+representative data from multiple waves of the Philippine Demographic
+and Health Survey (DHS), which provide data on household structure and
+maternal characteristics, as well as measurements of child
+anthropometry. The outcomes of interest are height-for-age and
+weight-for-height z-scores, which serve as standardized indicators of
+chronic and acute malnutrition, respectively. These outcomes are widely
+used in the global health and development literature and capture
+nutritional deprivation over both long and short time horizons
+\citep{victora2008maternal}. The empirical strategy follows a
+difference-in-differences design that compares child outcomes in Manila
+and comparable urban areas before and after the onset of the policy.
 
-This study contributes to the literature in several ways. It provides
-rare causal evidence that links fertility shocks to nutrition rather
-than education. It expands the definition of child quality to reflect
-physiological outcomes. It also highlights the long-run consequences of
-local reproductive policy in a middle-income democracy. In the wider
-policy landscape, the Philippine case offers a warning. Governments that
-restrict reproductive autonomy may unintentionally weaken child health
-and human capital formation. As countries pursue goals related to
-nutrition, health equity, and gender rights, evidence from natural
-experiments such as this one can inform the design of more inclusive and
-sustainable population policies.
+The identification strategy rests on two key assumptions. First, in the
+absence of the contraceptive ban, nutritional trends in Manila would
+have evolved in parallel with those in comparison cities. Second, any
+other policy or economic shocks affecting Manila during the study period
+must not coincide precisely with the timing and scope of the
+contraceptive policy. I test these assumptions using falsification
+checks, placebo comparisons, and robustness specifications that include
+city-specific time trends, maternal fixed effects, and controls for
+baseline demographic differences.
 
-Sample figure:
+The analysis proceeds in three stages. I first replicate existing work
+\citep{dumas2010fertility} to confirm that the contraceptive ban led to
+an increase in fertility among affected women. I then estimate
+reduced-form effects of policy exposure on nutritional outcomes for
+children under five years of age. Finally, I examine heterogeneity in
+effects across subsamples defined by maternal education, household
+wealth, and access to prenatal care. These dimensions serve as proxies
+for household resource availability and capacity to buffer the
+nutritional consequences of fertility increases.
 
-\begin{figure}
-Figure here.
-
-\caption{Caption for figure below.}
-\begin{figurenotes}
-Figure notes without optional leadin.
-\end{figurenotes}
-\begin{figurenotes}[Source]
-Figure notes with optional leadin (Source, in this case).
-\end{figurenotes}
-\end{figure}
-
-Sample table:
-
-\begin{table}
-\caption{Caption for table above.}
-
-\begin{tabular}{lll}
-& Heading 1 & Heading 2 \\
-Row 1 & 1 & 2 \\
-Row 2 & 3 & 4%
-\end{tabular}
-\begin{tablenotes}
-Table notes environment without optional leadin.
-\end{tablenotes}
-\begin{tablenotes}[Source]
-Table notes environment with optional leadin (Source, in this case).
-\end{tablenotes}
-\end{table}
-
-References here (manual or bibTeX). If you are using bibTeX, add your
-bib file name in place of BibFile in the bibliography command. \% Remove
-or comment out the next two lines if you are not using bibtex.
+This research contributes to the literature in several respects. It
+introduces new evidence on the nutritional consequences of fertility
+shocks in an urban developing-country context. It expands the
+measurement of child quality beyond educational outcomes to include
+biological indicators. It also adds to the limited body of work that
+uses plausibly exogenous variation in reproductive health policy to
+study downstream effects on human capital. More broadly, the findings
+underscore the potential for local family planning restrictions to
+generate unintended consequences for child well-being in settings
+characterized by poverty, food insecurity, and institutional fragility.
 
 \bibliographystyle{aea}
 \bibliography{references}
