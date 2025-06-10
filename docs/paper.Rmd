@@ -1,7 +1,7 @@
 ---
 title: "Nutritional Deficits and the Quantity-Quality Trade-off: Evidence from an Exogenous Fertility Shock in Low-Income Urban Settings in the Philippines"
 short: "The Beckerian Quantity-Quality Trade-off in the Philippine Context"
-journal: "2025 Schupf Fellowship Project" # AER, AEJ, PP, JEL
+journal: "" # AER, AEJ, PP, JEL
 month: "`r format(Sys.Date(), '%m')`"
 year: "`r format(Sys.Date(), '%Y')`"
 vol: 1
@@ -31,10 +31,7 @@ acknowledgements: |
   This research was made possible by the Schupf Fellowship at Amherst College. I am indebted to my faculty adviser, Professor Caroline Theoharides, for her mentorship and support throughout the development of this project. I also wish to thank Faculty Director Professor Amelie Hastie and the campus partners whose institutional support enabled this work. I am further grateful to the Departments of Economics and Mathematics & Statistics for their academic support. The views expressed and any errors contained herein are entirely my own responsibility.
 abstract: |
   This paper examines whether increased fertility affects early-life nutritional outcomes in low-income urban households. I exploit a natural experiment created by a 1990 policy in Manila, Philippines, which banned modern contraceptives from city-run health facilities. Using a difference-in-differences framework and nationally representative data from the Philippine Demographic and Health Surveys, I estimate the reduced-form impact of the policy on child height-for-age and weight-for-height. [Will add more after data analysis]
-output:
-  rticles::aea_article:
-    keep_tex: true
-    citation_package: natbib
+output: rticles::aea_article
 bibliography: references.bib
 ---
 

@@ -41,7 +41,7 @@
 
 \DeclareOption{AER}{
   % AER is the default if no journal is specified
-  \def\@issueName{THE AMERICAN ECONOMIC REVIEW}
+  \def\@issueName{AXEL H. SCHUPF RESEARCH FELLOWSHIP PROJECT}
   \@twosidetrue  
   \@twocolumnfalse
 }
