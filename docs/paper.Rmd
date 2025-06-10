@@ -1,6 +1,6 @@
 ---
 title: "Nutritional Deficits and the Quantity-Quality Trade-off: Evidence from an Exogenous Fertility Shock in Low-Income Urban Settings in the Philippines"
-short: "The Beckerian Quantity-Quality Trade-off in the Philippine Context"
+short: "The Q-Q Trade-off in the Philippine Context"
 journal: "" # AER, AEJ, PP, JEL
 month: "`r format(Sys.Date(), '%m')`"
 year: "`r format(Sys.Date(), '%Y')`"
@@ -85,9 +85,27 @@ I use this natural experiment to estimate the causal effect of increased fertili
 
 The identification strategy rests on two key assumptions. First, in the absence of the contraceptive ban, nutritional trends in Manila would have evolved in parallel with those in comparison cities. Second, any other policy or economic shocks affecting Manila during the study period must not coincide precisely with the timing and scope of the contraceptive policy. I test these assumptions using falsification checks, placebo comparisons, and robustness specifications that include city-specific time trends, maternal fixed effects, and controls for baseline demographic differences.
 
-The analysis proceeds in three stages. I first replicate existing work \citep{dumas2010fertility} to confirm that the contraceptive ban led to an increase in fertility among affected women. I then estimate reduced-form effects of policy exposure on nutritional outcomes for children under five years of age. Finally, I examine heterogeneity in effects across subsamples defined by maternal education, household wealth, and access to prenatal care. These dimensions serve as proxies for household resource availability and capacity to buffer the nutritional consequences of fertility increases.
+The analysis proceeds in three stages. I first replicate existing work \citep{dumas2019sex} to confirm that the contraceptive ban led to an increase in fertility among affected women. I then estimate reduced-form effects of policy exposure on nutritional outcomes for children under five years of age. Finally, I examine heterogeneity in effects across subsamples defined by maternal education, household wealth, and access to prenatal care. These dimensions serve as proxies for household resource availability and capacity to buffer the nutritional consequences of fertility increases.
 
 This research contributes to the literature in several respects. It introduces new evidence on the nutritional consequences of fertility shocks in an urban developing-country context. It expands the measurement of child quality beyond educational outcomes to include biological indicators. It also adds to the limited body of work that uses plausibly exogenous variation in reproductive health policy to study downstream effects on human capital. More broadly, the findings underscore the potential for local family planning restrictions to generate unintended consequences for child well-being in settings characterized by poverty, food insecurity, and institutional fragility.
+
+\section{Review of Related Literature}
+
+\subsection{Theoretical Background}
+
+The quantity–quality (Q–Q) trade-off is a core idea in the economics of fertility. It formalizes the constraint that when parents face a fixed income, they must allocate limited resources between the number of children they have and the amount invested in each child's development. In this framework, “quality” refers to any investment that raises a child’s human capital—such as nutrition, education, healthcare—while “quantity” refers simply to the number of children. Because these investments are resource-intensive, increasing one often comes at the expense of the other.
+
+Becker’s foundational model \citep{becker1960economic} formalizes this as a constrained optimization problem. A household maximizes utility over the number of children \(n\), child quality \(q\), and consumption \(c\):
+
+\[\max_{n,q,c} \quad U(n, q, c)\]
+
+subject to the budget constraint:
+
+\[I = c + n(p_n + p_q q),\]
+
+where \(I\) is household income, \(p_n\) is the fixed cost per child (e.g., food, shelter), and \(p_q\) is the marginal cost of investing in child quality. The budget constraint makes the trade-off explicit: increasing \(n\) reduces how much can be spent on \(q\), and vice versa.
+
+
 
 \bibliographystyle{aea}
 \bibliography{references}
