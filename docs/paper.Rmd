@@ -4,8 +4,6 @@ short: "The Q-Q Trade-off in the Philippine Context"
 journal: "" # AER, AEJ, PP, JEL
 month: "`r format(Sys.Date(), '%m')`"
 year: "`r format(Sys.Date(), '%Y')`"
-vol: 1
-issue: 1
 jel:
   - J13  # Fertility; Childbearing; Family Planning; Population Policy
   - I15  # Health and Economic Development
@@ -31,7 +29,10 @@ acknowledgements: |
   This research was made possible by the Schupf Fellowship at Amherst College. I am indebted to my faculty adviser, Professor Caroline Theoharides, for her mentorship and support throughout the development of this project. I also wish to thank Faculty Director Professor Amelie Hastie and the campus partners whose institutional support enabled this work. I am further grateful to the Departments of Economics and Mathematics & Statistics for their academic support. The views expressed and any errors contained herein are entirely my own responsibility.
 abstract: |
   This paper examines whether increased fertility affects early-life nutritional outcomes in low-income urban households. I exploit a natural experiment created by a 1990 policy in Manila, Philippines, which banned modern contraceptives from city-run health facilities. Using a difference-in-differences framework and nationally representative data from the Philippine Demographic and Health Surveys, I estimate the reduced-form impact of the policy on child height-for-age and weight-for-height. [Will add more after data analysis]
-output: rticles::aea_article
+output: 
+  rticles::aea_article:
+    keep_tex: true
+    latex_engine: pdflatex
 bibliography: references.bib
 ---
 
@@ -87,23 +88,47 @@ The identification strategy rests on two key assumptions. First, in the absence 
 
 The analysis proceeds in three stages. I first replicate existing work \citep{dumas2019sex} to confirm that the contraceptive ban led to an increase in fertility among affected women. I then estimate reduced-form effects of policy exposure on nutritional outcomes for children under five years of age. Finally, I examine heterogeneity in effects across subsamples defined by maternal education, household wealth, and access to prenatal care. These dimensions serve as proxies for household resource availability and capacity to buffer the nutritional consequences of fertility increases.
 
-This research contributes to the literature in several respects. It introduces new evidence on the nutritional consequences of fertility shocks in an urban developing-country context. It expands the measurement of child quality beyond educational outcomes to include biological indicators. It also adds to the limited body of work that uses plausibly exogenous variation in reproductive health policy to study downstream effects on human capital. More broadly, the findings underscore the potential for local family planning restrictions to generate unintended consequences for child well-being in settings characterized by poverty, food insecurity, and institutional fragility.
+This study contributes to the literature in several important ways. It provides new evidence on how increases in fertility—caused by policy restrictions on family planning—can affect child nutrition in poor, urban communities. Most past research has focused on education, but this study expands the idea of child quality to include biological measures such as stunting and wasting. It also adds to the small number of studies that use unexpected changes in reproductive health policy to examine long-term effects on children’s well-being. More broadly, the results show that local restrictions on family planning can unintentionally harm children’s health, especially in settings where families already face poverty, food insecurity, and limited public services.
 
 \section{Review of Related Literature}
 
 \subsection{Theoretical Background}
 
-The quantity–quality (Q–Q) trade-off is a core idea in the economics of fertility. It formalizes the constraint that when parents face a fixed income, they must allocate limited resources between the number of children they have and the amount invested in each child's development. In this framework, “quality” refers to any investment that raises a child’s human capital—such as nutrition, education, healthcare—while “quantity” refers simply to the number of children. Because these investments are resource-intensive, increasing one often comes at the expense of the other.
+Gary Becker’s early work reframed fertility as an economic decision and drew on microeconomic theory to how families choose whether and how many children to have. In his 1960 paper, Becker challenged the then-dominant view that fertility declines with income were simply the result of better access to contraception or changing social values. Instead, he proposed that childbearing decisions could be modeled using the tools of consumer choice theory. Within this framework, children are treated as goods that provide utility, with households allocating resources to balance their desire for more children (quantity) against the desire to invest in each child (quality).
 
-Becker’s foundational model \citep{becker1960economic} formalizes this as a constrained optimization problem. A household maximizes utility over the number of children \(n\), child quality \(q\), and consumption \(c\):
+Becker argued that children serve both consumption and production purposes. They bring direct satisfaction to parents and may also contribute economically, especially in agrarian or informal settings. In the Philippines, many children aged 5–17 work informally—through street vending or helping in family businesses—to support household income, with an estimated 1.09 million children working in 2023 \citep{manilabulletin2024}. This economic role aligns with Becker’s framework and may partly explain why some low-income households continue to prefer larger families. At the same time, fertility tends to decline as income rises and per-child investments increase. According to the 2017 National Demographic and Health Survey, women in the poorest wealth quintile had an average of 4.5 children, compared to just 2.0 in the richest \citep{psa2018}. This inverse relationship between income and fertility, observed globally, also appears in the Philippine context: poorer households often maintain larger families, while wealthier ones prioritize child quality.
 
-\[\max_{n,q,c} \quad U(n, q, c)\]
+\citet{beckerlewis1973} build on these conceptual foundations to introduce the formal concept of a quantity–quality (Q–Q) trade-off. They develop a utility-maximizing framework in which parents allocate resources between the number of children and the quality of investments in each child. The model formalizes how parents maximize utility from consumption $c$, number of children $n$, and child quality $q$:
 
-subject to the budget constraint:
+$$
+U = U(c, n, q)
+$$
 
-\[I = c + n(p_n + p_q q),\]
+subject to the full income constraint: $$ I = c+n(p_n + q \times p_q) $$ where $p_n$ denotes the direct cost associated with bearing each additional child (e.g., delivery, basic needs), and $p_q$ represents the marginal cost of investing in quality per child, such as health care or education. The trade-off is reflected in the structure of the cost function, which reveals interaction effects: the marginal cost of improving child quality rises as the number of children increases, and similarly, the cost of an additional child rises with the level of quality investment per child. This complementarity is captured through the positive cross-derivatives:
 
-where \(I\) is household income, \(p_n\) is the fixed cost per child (e.g., food, shelter), and \(p_q\) is the marginal cost of investing in child quality. The budget constraint makes the trade-off explicit: increasing \(n\) reduces how much can be spent on \(q\), and vice versa.
+$$
+\frac{\partial MC_q}{\partial n} > 0 \quad \text{and} \quad \frac{\partial MC_n}{\partial q} > 0
+$$
+
+In short, the more children a family has, the more difficult it becomes to allocate sufficient resources—such as time, nutrition, and education—to each child.
+
+While the static Q–Q model explains the immediate trade-offs families face between the number and quality of children, it remains limited in scope by assuming a single-period decision framework, which fails to account for intertemporal linkages—for instance, how early investments in child health or education may constrain or enhance later household choices—and overlooks how forward-looking behavior, such as anticipated returns to child quality in the form of future earnings or social mobility, may influence present-day household choices. To address this, \citet{becker1976child} developed a dynamic model that explicitly incorporates intergenerational mobility. In this model, parents account for how their fertility and investment choices shape the human capital outcomes of their children—for example, how a decision to space births more closely can constrain parental resources and reduce per-child investments in health and education. The resulting dynastic utility function captures both present and future-oriented preferences:
+
+$$
+U = u(c) + \beta \cdot n \cdot V(q)
+$$
+
+where $\beta$ denotes child altruism, or the extent to which parents value their children’s future well-being relative to their own consumption. A higher $\beta$ indicates stronger intergenerational concern, meaning parents are more willing to sacrifice current resources to improve their children’s prospects. For example, a low-income family in the Philippines might choose to send a child to private school despite financial constraints to increase the child’s future earnings or social mobility. Conversely, a lower $\beta$ implies a stronger emphasis on present needs and diminished willingness to invest in long-term child outcomes. This may occur in households facing severe income insecurity, where sending children to work may be prioritized over education. On the other hand, $V(q)$ represents the expected return on child quality. A high $V(q)$ implies that parents expect substantial future benefits from quality investments, such as access to better-paying jobs or improved life expectanc, making such investments more worthwhile than having additional children. A low $V(q)$, in contrast, suggests that even with significant investments, the perceived or actual gains are limited, often due to barriers like poor school quality, weak labor demand, or geographic constraints. 
+
+To formalize the trade-off similarly as in the static model, we again impose the full income constraint. In optimizing this problem, the first-order condition for child quality becomes:
+
+$$
+\beta \cdot V'(q) = p_q + n \cdot \frac{\partial p_q}{\partial q}
+$$
+
+This condition implies that the marginal benefit of child quality, scaled by altruism $\beta$, must equal the marginal cost of improving that quality. As family size $n$ increases, the cost of maintaining or increasing quality also rises. This reinforces the quantity–quality trade-off: families with more children may face sharper constraints in deepening investments per child. In contexts like the Philippines, where income constraints are binding and child quality has high private returns, this model predicts lower fertility and increased education spending among upwardly mobile households. 
+
+
 
 
 
