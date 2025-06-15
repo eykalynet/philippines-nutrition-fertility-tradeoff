@@ -555,7 +555,7 @@
   \leftskip=0pt\rightskip=0pt
   \let\@oddfoot\@empty
   \let\@evenfoot\@empty
-  \def\@oddhead{{\small\textit{\MakeUppercase{VOL. \@pubVolume\ \ NO. \@pubIssue\hfil\@shortTitle\hfil\thepage}}}}
+  \def\@oddhead{{\small\textit{\MakeUppercase{\@pubMonth\ \@pubYear\hfil\@shortTitle\hfil\thepage}}}}
   \def\@evenhead{{\small\textit{\MakeUppercase{\thepage\hfil\@issueName\hfil\@pubMonth\ \@pubYear}}}}
 }
 
