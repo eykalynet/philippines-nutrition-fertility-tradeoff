@@ -94,7 +94,7 @@ weight-for-height. {[}Will add more after data analysis{]}
 The trade-off between child quantity and child quality is a foundational
 concept in the economics of the family. First articulated by
 \citet{becker1960economic} and extended in subsequent models of
-household behavior \citep{beckerlewis1973, beckertomes1976}, this
+household behavior \citep{becker1973interaction, becker1976child}, this
 framework posits that parents allocate finite resources---both financial
 and non-financial---across children. An increase in fertility reduces
 the resources available per child and, under binding constraints, may
@@ -201,123 +201,181 @@ services.
 
 \section{Review of Related Literature}
 
+The quantity--quality (Q--Q) theory, a central idea in modern family
+economics, holds that parents face a trade-off between the number of
+children and the ``quality'' of investment---such as education or
+health---they can provide to each. Quality in this context refers to the
+human capital of each child: attributes like education, health, and
+nutrition that enhance a child's future productivity and well-being. The
+genesis of this idea traces back to Gary Becker's seminal work around
+1960, which for the first time treated children as economic goods
+subject to parental choice and budget constraints
+\citep{becker1960economic}. Becker argued that as families become
+wealthier, they may not simply want more children, but rather
+better-raised children, much as a household might prefer a
+higher-quality car or house over a greater quantity of them. This
+proposition led to a formal theory in which increases in income or
+changes in economic conditions cause parents to substitute child quality
+for quantity, consistent with historical patterns of lower fertility and
+higher educational attainment during economic development
+\citep{galor2000population}.
+
+In what follows, I review the theoretical foundations of the Q-Q model
+and its evolution in the literature. I begin with the static models of
+Becker \citep{becker1960economic} and Becker--Lewis
+\citep{becker1973interaction}, which first formalized the trade-off
+within a household utility maximization framework. We then examine
+extensions to dynamic, intergenerational settings, including the
+contributions of Becker and Tomes \citep{becker1976child} on child
+endowments and the altruistic dynastic model associated with Barro and
+Becker \citep{barro1989fertility}. Next, I turn to macroeconomic and
+unified growth models, notably Galor and Weil
+\citep{galor2000population} and Galor and Moav \citep{galor2002natural},
+which integrate the Q--Q mechanism into a general theory of demographic
+and economic transformation.
+
+Finally, I discuss more recent refinements that enrich the basic model
+by incorporating credit constraints \citep{doepke2004accounting},
+intra-household bargaining \citep{doepke2019bargaining}, and
+multi-dimensional child quality
+\citep{hoddinott2013economic, kalemli2002does}, with a special emphasis
+on health and nutrition. My focus is on how the Q--Q framework has been
+applied to understand fertility and child investment patterns,
+especially in developing country contexts where resource constraints and
+health outcomes are paramount.
+
 \subsection{Theoretical Background}
 
-Gary Becker's early work reframed fertility as an economic decision and
-drew on microeconomic theory to how families choose whether and how many
-children to have. In his 1960 paper, Becker challenged the then-dominant
-view that fertility declines with income were simply the result of
-better access to contraception or changing social values. Instead, he
-proposed that childbearing decisions could be modeled using the tools of
-consumer choice theory. Within this framework, children are treated as
-goods that provide utility, with households allocating resources to
-balance their desire for more children (quantity) against the desire to
-invest in each child (quality).
-
-Becker argued that children serve both consumption and production
-purposes. They bring direct satisfaction to parents and may also
-contribute economically, especially in agrarian or informal settings. In
-the Philippines, many children aged 5--17 work informally---through
-street vending or helping in family businesses---to support household
-income, with an estimated 1.09 million children working in 2023
-\citep{manilabulletin2024}. This economic role aligns with Becker's
-framework and may partly explain why some low-income households continue
-to prefer larger families. At the same time, fertility tends to decline
-as income rises and per-child investments increase. According to the
-2017 National Demographic and Health Survey, women in the poorest wealth
-quintile had an average of 4.5 children, compared to just 2.0 in the
-richest \citep{psa2018}. This inverse relationship between income and
-fertility, observed globally, also appears in the Philippine context:
-poorer households often maintain larger families, while wealthier ones
-prioritize child quality.
-
-\citet{beckerlewis1973} build on these conceptual foundations to
-introduce the formal concept of a quantity--quality (Q--Q) trade-off.
-They develop a utility-maximizing framework in which parents allocate
-resources between the number of children and the quality of investments
-in each child. The model formalizes how parents maximize utility from
-consumption \(c\), number of children \(n\), and child quality \(q\):
+Becker's early work introduced an economic approach to fertility,
+treating children analogous to ``durable goods'' that yield utility to
+parents but come at a cost \citep{doepke2015gary}. In Becker's 1960
+model, a household derives satisfaction from the number of children
+(\(n\)) and from the quality of each child (\(q\)), alongside
+conventional consumption of other goods (\(y\)). A simple representation
+is a utility function:
 
 \[
-U = U(c, n, q)
+U = U(n, q, y),
 \]
 
-subject to the full income constraint: \[ I = c+n(p_n + q \times p_q) \]
-where \(p_n\) denotes the direct cost associated with bearing each
-additional child (e.g., delivery, basic needs), and \(p_q\) represents
-the marginal cost of investing in quality per child, such as health care
-or education. The trade-off is reflected in the structure of the cost
-function, which reveals interaction effects: the marginal cost of
-improving child quality rises as the number of children increases, and
-similarly, the cost of an additional child rises with the level of
-quality investment per child. This complementarity is captured through
-the positive cross-derivatives:
+with \(U\) increasing in each argument up to some satiation point. Here
+quality \(q\) can be thought of as the expenditure or investment per
+child (e.g.~education spending, health care, nutrition), assumed for now
+to be the same for each child. Parents face a budget constraint that
+links quantity and quality: raising more children dilutes the resources
+available per child. A prototypical budget constraint (in static form)
+can be written as:
 
 \[
-\frac{\partial MC_q}{\partial n} > 0 \quad \text{and} \quad \frac{\partial MC_n}{\partial q} > 0
+p_y y + p_n n + p_q n q = I,
 \]
 
-In short, the more children a family has, the more difficult it becomes
-to allocate sufficient resources---such as time, nutrition, and
-education---to each child.
+where \(I\) is total family income (or full income), \(p_n\) represents
+baseline, non-discretionary costs associated with each additional child
+(e.g.~expenditures on food, shelter, or clothing that are incurred
+irrespective of quality-enhancing investments), and \(p_q\) denotes the
+marginal cost of investing in one unit of quality per child.The term
+\(p_q n q\) captures total expenditure on quality for all children and
+is linear in \(n\). As the number of children rises, parents must extend
+any chosen level of \(q\) across a broader base, which amplifies the
+total cost of quality. Conversely, the term \(p_n n\) implies that the
+cost of an additional child rises with the quality level \(q\) already
+chosen, since each child must meet a higher standard of care or
+investment. For instance, a household that chooses to provide more
+education or better health care per child incurs an additional burden
+when it expands family size, as each child must receive the same
+enhanced level of investment. Similarly, a larger family increases the
+cumulative cost of quality, even if \(q\) remains fixed, due to the need
+to replicate expenditures across more children. In short, the shadow
+price of child quality increases with \(n\), and the shadow price of
+child quantity increases with \(q\). The cost structure induces a mutual
+dependence between quantity and quality, such that any adjustment along
+one dimension alters the effective cost of the other.
 
-While the static Q--Q model explains the immediate trade-offs families
-face between the number and quality of children, it remains limited in
-scope by assuming a single-period decision framework, which fails to
-account for intertemporal linkages---for instance, how early investments
-in child health or education may constrain or enhance later household
-choices---and overlooks how forward-looking behavior, such as
-anticipated returns to child quality in the form of future earnings or
-social mobility, may influence present-day household choices. To address
-this, \citet{becker1976child} developed a dynamic model that explicitly
-incorporates intergenerational mobility. In this model, parents account
-for how their fertility and investment choices shape the human capital
-outcomes of their children---for example, how a decision to space births
-more closely can constrain parental resources and reduce per-child
-investments in health and education. The resulting dynastic utility
-function captures both present and future-oriented preferences:
+Becker and Lewis (1973) formalize the mutually reinforcing nature of the
+quantity--quality cost structure. An increase in \(n\) raises the total
+cost required to sustain a given level of \(q\) for each child, while a
+higher level of \(q\) raises the marginal cost associated with having an
+additional child. For example, allocating more resources to education or
+health per child increases the financial burden of expanding family
+size. This interdependence links the two decisions directly. The
+household cannot choose \(n\) and \(q\) in isolation; each choice alters
+the marginal cost of the other.
+
+Mathematically, the trade-off appears in the first-order conditions of
+the household's optimization problem. Let \(\lambda\) represent the
+Lagrange multiplier on the full-income constraint.
 
 \[
-U = u(c) + \beta \cdot n \cdot V(q)
+\mathcal{L} = U(n, q, y) + \lambda \left( I - p_y y - p_n n - p_q n q \right).
 \]
 
-where \(\beta\) denotes child altruism, or the extent to which parents
-value their children's future well-being relative to their own
-consumption. A higher \(\beta\) indicates stronger intergenerational
-concern, meaning parents are more willing to sacrifice current resources
-to improve their children's prospects. For example, a low-income family
-in the Philippines might choose to send a child to private school
-despite financial constraints to increase the child's future earnings or
-social mobility. Conversely, a lower \(\beta\) implies a stronger
-emphasis on present needs and diminished willingness to invest in
-long-term child outcomes. This may occur in households facing severe
-income insecurity, where sending children to work may be prioritized
-over education. On the other hand, \(V(q)\) represents the expected
-return on child quality. A high \(V(q)\) implies that parents expect
-substantial future benefits from quality investments, such as access to
-better-paying jobs or improved life expectanc, making such investments
-more worthwhile than having additional children. A low \(V(q)\), in
-contrast, suggests that even with significant investments, the perceived
-or actual gains are limited, often due to barriers like poor school
-quality, weak labor demand, or geographic constraints.
-
-To formalize the trade-off similarly as in the static model, we again
-impose the full income constraint. In optimizing this problem, the
-first-order condition for child quality becomes:
+The first-order conditions are:
 
 \[
-\beta \cdot V'(q) = p_q + n \cdot \frac{\partial p_q}{\partial q}
+\frac{\partial \mathcal{L}}{\partial n} = U_n - \lambda(p_n + p_q q) = 0, \quad
+\frac{\partial \mathcal{L}}{\partial q} = U_q - \lambda p_q n = 0, \quad
+\frac{\partial \mathcal{L}}{\partial y} = U_y - \lambda p_y = 0.
 \]
 
-This condition implies that the marginal benefit of child quality,
-scaled by altruism \(\beta\), must equal the marginal cost of improving
-that quality. As family size \(n\) increases, the cost of maintaining or
-increasing quality also rises. This reinforces the quantity--quality
-trade-off: families with more children may face sharper constraints in
-deepening investments per child. In contexts like the Philippines, where
-income constraints are binding and child quality has high private
-returns, this model predicts lower fertility and increased education
-spending among upwardly mobile households.
+Combining the first two yields:
+
+\[
+\frac{U_n}{U_q} = \frac{p_n + p_q q}{p_q n}.
+\] This condition equates the marginal rate of substitution between
+quantity and quality to the ratio of their full marginal costs. The
+numerator rises with \(q\), and the denominator rises with \(n\). As one
+choice increases, the relative cost of the other becomes higher. This
+relationship induces substitution toward the less costly dimension. The
+trade-off between quantity and quality arises from the structure of the
+budget itself. It does not rely on specific assumptions about utility
+curvature or intrinsic substitutability \citep{becker1973interaction}.
+
+This formulation implies two core predictions. Firstly, although both
+child quantity and child quality may rise with income, the household's
+budget constraint can generate a negative relationship between income
+and fertility. As income increases, total spending on children tends to
+rise, but the allocation often favors quality over quantity. Becker
+illustrated this with the analogy of durable goods: wealthier households
+tend to upgrade the quality of a house or a car rather than acquire
+additional units. In a similar way, higher-income families often direct
+additional resources toward education, nutrition, or health per child.
+Within the model, an income increase (\(\mathrm{d}I > 0\)) produces a
+direct effect that makes children more affordable and an indirect effect
+that discourages fertility. As \(q\) rises, the shadow price of an
+additional child also rises. If the marginal utility from higher quality
+exceeds that from larger family size, then the substitution effect
+outweighs the income effect, leading to a lower optimal \(n\). This
+mechanism offers a structural explanation for the demographic
+transition: fertility tends to fall as households become richer, even
+when preferences remain unchanged.
+
+Furthermore, a similar logic applies to changes in the cost parameters
+\(p_q\) and \(p_n\). A decline in \(p_q\), such as through a policy that
+lowers the price of education or health care, increases \(q\) and raises
+the marginal cost of quantity. This effect reduces optimal fertility. A
+rise in \(p_n\), which may reflect higher child-rearing costs or a
+greater opportunity cost of parental time, reduces the appeal of larger
+families and can shift resources toward child quality. These outcomes
+follow from the structure of the budget constraint, without requiring
+any explicit preference for quality over quantity. Becker and Lewis
+noted that these comparative static results align with observed
+patterns. For example, increases in women's wages often reduce fertility
+more than they reduce educational spending per child. This asymmetry
+reflects the model's central feature: quantity and quality are linked
+through their cost structure. An increase in one raises the marginal
+cost of the other. The model explains how households make trade-offs
+between the number of children and investments in each.
+
+While the early Q--Q models were static (one-period) representations,
+subsequent contributions extended the framework to consider fertility
+and child investment over multiple periods or even multiple generations.
+A central development in this literature was the incorporation of
+intergenerational human capital dynamics, where parents derive utility
+not only from the number and quality of children in the present, but
+also from the long-run outcomes of their offspring. These extensions
+allowed child quality to evolve endogenously across time, rather than
+being determined solely within a single period.
 
 \bibliographystyle{aea}
 \bibliography{references}

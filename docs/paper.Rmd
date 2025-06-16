@@ -100,6 +100,54 @@ Finally, I discuss more recent refinements that enrich the basic model by incorp
 
 \subsection{Theoretical Background}
 
+Becker’s early work introduced an economic approach to fertility, treating children analogous to “durable goods” that yield utility to parents but come at a cost \citep{doepke2015gary}. In Becker’s 1960 model, a household derives satisfaction from the number of children ($n$) and from the quality of each child ($q$), alongside conventional consumption of other goods ($y$). A simple representation is a utility function:
+
+$$
+U = U(n, q, y),
+$$
+
+with $U$ increasing in each argument up to some satiation point. Here quality $q$ can be thought of as the expenditure or investment per child (e.g. education spending, health care, nutrition), assumed for now to be the same for each child. Parents face a budget constraint that links quantity and quality: raising more children dilutes the resources available per child. A prototypical budget constraint (in static form) can be written as:
+
+$$
+p_y y + p_n n + p_q n q = I,
+$$
+
+where $I$ is total family income (or full income), $p_n$ represents baseline, non-discretionary costs associated with each additional child (e.g. expenditures on food, shelter, or clothing that are incurred irrespective of quality-enhancing investments), and $p_q$ denotes the marginal cost of investing in one unit of quality per child.The term $p_q n q$ captures total expenditure on quality for all children and is linear in $n$. As the number of children rises, parents must extend any chosen level of $q$ across a broader base, which amplifies the total cost of quality. Conversely, the term $p_n n$ implies that the cost of an additional child rises with the quality level $q$ already chosen, since each child must meet a higher standard of care or investment. For instance, a household that chooses to provide more education or better health care per child incurs an additional burden when it expands family size, as each child must receive the same enhanced level of investment. Similarly, a larger family increases the cumulative cost of quality, even if $q$ remains fixed, due to the need to replicate expenditures across more children. In short, the shadow price of child quality increases with $n$, and the shadow price of child quantity increases with $q$. The cost structure induces a mutual dependence between quantity and quality, such that any adjustment along one dimension alters the effective cost of the other.
+
+Becker and Lewis (1973) formalize the mutually reinforcing nature of the quantity–quality cost structure. An increase in $n$ raises the total cost required to sustain a given level of $q$ for each child, while a higher level of $q$ raises the marginal cost associated with having an additional child. For example, allocating more resources to education or health per child increases the financial burden of expanding family size. This interdependence links the two decisions directly. The household cannot choose $n$ and $q$ in isolation; each choice alters the marginal cost of the other.
+
+Mathematically, the trade-off appears in the first-order conditions of the household’s optimization problem. Let $\lambda$ represent the Lagrange multiplier on the full-income constraint.
+
+$$
+\mathcal{L} = U(n, q, y) + \lambda \left( I - p_y y - p_n n - p_q n q \right).
+$$
+
+The first-order conditions are:
+
+$$
+\frac{\partial \mathcal{L}}{\partial n} = U_n - \lambda(p_n + p_q q) = 0, \quad
+\frac{\partial \mathcal{L}}{\partial q} = U_q - \lambda p_q n = 0, \quad
+\frac{\partial \mathcal{L}}{\partial y} = U_y - \lambda p_y = 0.
+$$
+
+Combining the first two yields:
+
+$$
+\frac{U_n}{U_q} = \frac{p_n + p_q q}{p_q n}.
+$$
+This condition equates the marginal rate of substitution between quantity and quality to the ratio of their full marginal costs. The numerator rises with $q$, and the denominator rises with $n$. As one choice increases, the relative cost of the other becomes higher. This relationship induces substitution toward the less costly dimension. The trade-off between quantity and quality arises from the structure of the budget itself. It does not rely on specific assumptions about utility curvature or intrinsic substitutability \citep{becker1973interaction}.
+
+
+This formulation implies two core predictions. Firstly, although both child quantity and child quality may rise with income, the household’s budget constraint can generate a negative relationship between income and fertility. As income increases, total spending on children tends to rise, but the allocation often favors quality over quantity. Becker illustrated this with the analogy of durable goods: wealthier households tend to upgrade the quality of a house or a car rather than acquire additional units. In a similar way, higher-income families often direct additional resources toward education, nutrition, or health per child. Within the model, an income increase ($\mathrm{d}I > 0$) produces a direct effect that makes children more affordable and an indirect effect that discourages fertility. As $q$ rises, the shadow price of an additional child also rises. If the marginal utility from higher quality exceeds that from larger family size, then the substitution effect outweighs the income effect, leading to a lower optimal $n$. This mechanism offers a structural explanation for the demographic transition: fertility tends to fall as households become richer, even when preferences remain unchanged.
+
+Furthermore, a similar logic applies to changes in the cost parameters $p_q$ and $p_n$. A decline in $p_q$, such as through a policy that lowers the price of education or health care, increases $q$ and raises the marginal cost of quantity. This effect reduces optimal fertility. A rise in $p_n$, which may reflect higher child-rearing costs or a greater opportunity cost of parental time, reduces the appeal of larger families and can shift resources toward child quality. These outcomes follow from the structure of the budget constraint, without requiring any explicit preference for quality over quantity. Becker and Lewis noted that these comparative static results align with observed patterns. For example, increases in women’s wages often reduce fertility more than they reduce educational spending per child. This asymmetry reflects the model’s central feature: quantity and quality are linked through their cost structure. An increase in one raises the marginal cost of the other. The model explains how households make trade-offs between the number of children and investments in each.
+
+While the early Q–Q models were static (one-period) representations, subsequent contributions extended the framework to consider fertility and child investment over multiple periods or even multiple generations. A central development in this literature was the incorporation of intergenerational human capital dynamics, where parents derive utility not only from the number and quality of children in the present, but also from the long-run outcomes of their offspring. These extensions allowed child quality to evolve endogenously across time, rather than being determined solely within a single period.
+
+
+
+
+
 
 \bibliographystyle{aea}
 \bibliography{references}
