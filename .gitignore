@@ -1,3 +1,7 @@
+# ========================
+# R and RStudio Ignored Files
+# ========================
+
 # History files
 .Rhistory
 .Rapp.history
@@ -44,3 +48,32 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# ========================
+# Project-specific Ignored Files
+# ========================
+
+# Raw and processed data
+data-analysis/raw-data/
+data-analysis/clean-data/*.rds
+data-analysis/clean-data/*.csv
+
+# Output tables
+data-analysis/outputs/*.csv
+data-analysis/outputs/*.tex
+
+# Figures
+data-analysis/figures/*.pdf
+data-analysis/figures/*.png
+data-analysis/figures/*.jpg
+
+# Models
+data-analysis/models/*.rds
+
+# Logs and temporary output
+data-analysis/logs/
+*.Rout
+
+# System files
+.DS_Store
+Thumbs.db
