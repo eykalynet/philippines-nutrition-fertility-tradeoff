@@ -58,10 +58,6 @@ data-analysis/raw-data/
 data-analysis/clean-data/*.rds
 data-analysis/clean-data/*.csv
 
-# Output tables
-data-analysis/outputs/*.csv
-data-analysis/outputs/*.tex
-
 # Figures
 data-analysis/figures/*.pdf
 data-analysis/figures/*.png
