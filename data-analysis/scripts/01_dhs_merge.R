@@ -1,5 +1,5 @@
 # ==============================================================================
-# 01_dhs_clean.R -
+# 01_dhs_merge.R -
 # Purpose = Build an under-five child-level analytic panel from Philippine DHS
 #           rounds 1993-2013.  Steps: read KR / IR / HR, keep core variables,
 #           merge, derive nutrition flags, save cleaned datasets.
@@ -11,7 +11,7 @@
 #   1) Reads the raw child (KR), mother (IR), and household (HR)
 #      files for each survey year.
 #   2) Keeps only the variables we actually need.
-#   3) Adds prefixes (“m_”, “h_”) so mother- and household-level
+#   3) Adds prefixes (???m_???, ???h_???) so mother- and household-level
 #      columns cannot collide with child-level names when merged.
 #   4) Merges the three files so that every row is a child.
 #   5) Stacks (appends) all years together.
@@ -39,7 +39,7 @@ survey_years <- c(1993, 1998, 2003, 2008, 2013)
 kr_keep <- c(                                   # CHILD file
   "survey_year", "v001", "v002", "v003", "bidx",          # IDs
   "b4", "b5", "bord", "b9",                               # sex, survival, birth order, age (mos.)
-  "hw70", "hw71", "hw72",                                 # HAZ, WAZ, WHZ ×100
+  "hw70", "hw71", "hw72",                                 # HAZ, WAZ, WHZ ??100
   "m14", "m15", "m3a", "m3b", "m3c", "m3h",               # ANC & delivery
   "h2","h3","h4","h5","h6","h7","h8","h9",                # vaccinations
   "h11", "h22", "h31",                                    # illness
@@ -76,7 +76,7 @@ load_and_clean_year <- function(year) {
     mutate(survey_year = year) |>
     select(any_of(ir_keep)) |>
     rename_with(~ paste0("m_", .x), -c(survey_year, v001, v002, v003))
-  # Prefix “m_” ensures we don't overwrite shared variable names like v024 (region)
+  # Prefix ???m_??? ensures we don't overwrite shared variable names like v024 (region)
   
   # HOUSEHOLD (HR)
   hr_file <- file.path(raw_dir, paste0("dhs_", year, "_hr_household.DTA"))
@@ -84,9 +84,9 @@ load_and_clean_year <- function(year) {
     mutate(survey_year = year) |>
     select(any_of(hr_keep)) |>
     rename_with(~ paste0("h_", .x), -c(survey_year, hv001, hv002))
-  # Prefix “h_” keeps household variables distinct
+  # Prefix ???h_??? keeps household variables distinct
   
-  # Merge: CHILD ← MOTHER ← HOUSEHOLD 
+  # Merge: CHILD ??? MOTHER ??? HOUSEHOLD 
   kr_ir <- left_join(kr, ir, by = c("survey_year", "v001", "v002", "v003"))
   full  <- left_join(kr_ir, hr, by = c("survey_year", "v001" = "hv001", "v002" = "hv002"))
   
