@@ -317,7 +317,7 @@ The empirical strategy exploits the 2000 issuance of Executive Order No. 003, wh
 
 I estimate the following difference-in-differences specification:
 
-\text{Nutrition}_{ict} = \alpha + \beta \cdot (\text{Post}_t \times \text{Manila}_c) + X_{ict}'\gamma + \lambda_c + \tau_t + \varepsilon_{ict}
+$$ \text{Nutrition}_{ict} = \alpha + \beta \cdot (\text{Post}_t \times \text{Manila}_c) + X_{ict}'\gamma + \lambda_c + \tau_t + \varepsilon_{ict} $$
 
 In this equation, $\text{Nutrition}_{ict}$ refers to either height-for-age (HAZ) or weight-for-height (WHZ) for child $i$ in city $c$ born in year $t$. The indicator $\text{Post}_t$ equals 1 if the child was born after the implementation of Executive Order No. 003 in 2000, and $\text{Manila}c$ equals 1 if the child resides in Manila City. The interaction term captures the effect of being born in Manila after the contraceptive policy was enacted. The vector $X{ict}$ includes controls for child age in months, sex, birth order, maternal age, education, parity, body mass index (BMI), anemia status, household wealth quintile, household size, electricity access, water source, toilet type, shared sanitation status, and urban residence. City fixed effects $\lambda_c$ control for time-invariant characteristics at the locality level, while year fixed effects $\tau_t$ absorb aggregate time shocks. The coefficient of interest, $\beta$, represents the average treatment effect of the policy-induced fertility shock on child nutrition. Standard errors are clustered at the city-year level to account for potential autocorrelation within geographic units over time.
 
