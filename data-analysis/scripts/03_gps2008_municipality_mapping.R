@@ -1,22 +1,27 @@
 # ==============================================================================
-# gps2008_municipality_mapping.R -
-# Purpose = Map 2008 DHS GPS clusters to municipalities using GADM level-3 shapefile.
-# Author  : Erika Salvador '28 (esalvador28@amherst.edu) 
-# Project : Manila Contraceptive Ban & the Quantity-Quality Trade-off (nutrition arm)
+# Script Name : gps2008_municipality_mapping.R
+# Purpose     : Map 2008 DHS GPS clusters to municipalities using GADM level-3 shapefile
+# Author      : Erika Salvador '28 (esalvador28@amherst.edu)
+# Project     : Empirical Evidence of the Quantity–Quality Trade-off in the Philippines
 #
-# In plain English this script:
-#   1) Loads the 2008 DHS GPS shapefile directly (no .dta used).
-#   2) Filters valid cluster points (with coordinates).
-#   3) Loads GADM level-3 shapefile for the Philippines.
-#   4) Spatially joins GPS coordinates to municipalities (NAME_3).
-#   5) Outputs a clean CSV with cluster-to-municipality mapping.
+# Description :
+#   This script performs the following steps:
+#     - Loads the 2008 DHS GPS shapefile directly (no .dta used)
+#     - Filters out invalid or missing cluster coordinates
+#     - Loads the GADM level-3 administrative boundary shapefile for the Philippines
+#     - Performs a spatial join of GPS points to municipal boundaries (NAME_3)
+#     - Outputs a clean .csv file mapping GPS clusters to municipalities
 # ==============================================================================
+
+# 0. Set Project Root ==========================================================
+library(here)
+here::i_am("data-analysis/scripts/03_gps2008_municipality_mapping.R")
 
 # 1. Load libraries ============================================================
 # install.packages(c("sf", "dplyr", "here"))
-library(sf)     # for reading shapefiles & spatial joins
-library(dplyr)  # for data wrangling
-library(here)   # for path management
+library(sf)     # For reading shapefiles & spatial joins
+library(dplyr)  # For data wrangling
+library(here)   # For path management
 
 # 2. File paths ================================================================
 gps_dir   <- here("data-analysis", "raw-data", "dhs_raw", "2008_gps", "PHGE52FL")
