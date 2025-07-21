@@ -1,15 +1,22 @@
 # ==============================================================================
-# merge_wealth_hr_1993_1998.R
-# Purpose: Merge Wealth Index (WI) data into HR (Household Recode) files
-#          for the 1993 and 1998 Philippine DHS.
-# Author : Erika Salvador '28 (esalvador28@amherst.edu)
-# Project: Empirical Evidence of the Quantity–Quality Trade-off in the Philippines
-# In plain English, this script:
-# - Loads HR and WI household-level files for 1993 and 1998
-# - Harmonizes household identifiers (hhid/whhid)
-# - Merges wealth quintile (hv270) and factor score (hv271) into HR
-# - Saves merged datasets and reports match rates
+# Script Name : merge_wealth_hr_1993_1998.R
+# Purpose     : Merge Wealth Index (WI) data into Household Recode (HR) files 
+#               for the 1993 and 1998 Philippine DHS
+# Author      : Erika Salvador '28 (esalvador28@amherst.edu)
+# Project     : Empirical Evidence of the Quantity–Quality Trade-off in the Philippines
+#
+# Description :
+#   This script performs the following steps:
+#     - Loads HR and WI household-level datasets for 1993 and 1998
+#     - Harmonizes household identifiers (hhid/whhid) across files
+#     - Merges wealth quintile (hv270) and wealth factor score (hv271) into HR
+#     - Outputs merged datasets in .dta format
+#     - Reports merge success and match rates by year
 # ==============================================================================
+
+# 0. Set Project Root ==========================================================
+library(here)
+here::i_am("data-analysis/scripts/01_merge_kr_with_wi_1993_1998.R")
 
 # 1. Load Required Libraries ===================================================
 library(haven)     # For loading .DTA files
