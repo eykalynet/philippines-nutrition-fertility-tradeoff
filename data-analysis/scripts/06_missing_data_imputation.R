@@ -15,6 +15,10 @@
 #   - Saves the imputed and weighted datasets for downstream use
 # ==============================================================================
 
+# 0. Set Project Root ==========================================================
+library(here)
+here::i_am("data-analysis/scripts/06_missing_data_imputation.R")
+
 # 1. Load Libraries ============================================================
 library(mice)
 library(dplyr)
