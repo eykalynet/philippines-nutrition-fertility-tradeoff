@@ -1,0 +1,86 @@
+---
+title: "98c_paper_outputs"
+format: pdf
+---
+
+```{r}
+# Core data wrangling
+library(dplyr)
+library(stats)
+library(MASS)
+library(broom)
+library(modelsummary)   
+library(ggplot2)
+
+```
+
+```{r}
+dhs1 <- readRDS("../clean-data/dhs_kr_children_with_geo.rds") |>
+  filter(survey_year %in% c(1998, 2003, 2008)) |>
+    mutate(
+      number_of_siblings = living_children - 1)
+
+dhs2 <- dhs1 %>%
+  mutate(
+    manila = as.character(municipality_name) == "Manila",
+    post_policy = birth_year >= 2000,
+    manila_post = manila * post_policy
+  )
+```
+
+```{r}
+library(fixest)
+library(kableExtra)
+
+# 1. First-stage: total children ever
+first_stage1 <- feols(
+  total_children_ever ~ manila + post_policy + manila_post +
+    mother_educ_attain + mother_age_current + wealth_index | survey_year,
+  data = dhs2
+)
+
+# 2. First-stage: number of living children
+first_stage2 <- feols(
+  living_children ~ manila + post_policy + manila_post +
+    mother_educ_attain + mother_age_current + wealth_index | survey_year,
+  data = dhs2
+)
+
+# Name your models
+models <- list(
+  "Total Children Ever" = first_stage1,
+  "Living Children" = first_stage2
+)
+
+# Prepare LaTeX table string
+table_latex <- modelsummary(
+  models,
+  output = "latex",
+  statistic = "p.value",
+  coef_map = c(
+    manila = "Manila",
+    post_policy = "Post-Policy",
+    manila_post = "Manila × Post",
+    mother_educ_attain = "Mother's Education",
+    mother_age_current = "Mother's Age",
+    wealth_index = "Wealth Index"
+  ),
+  gof_omit = "IC|Log|Std.Errors",
+  notes = list("All regressions include survey year fixed effects."),
+  fmt = 3,
+  stars = TRUE,
+  escape = FALSE,
+  latex_options = "tabular"  # prevents talltblr error
+)
+
+# Save to .tex file
+writeLines(
+  capture.output(print(table_latex)),
+  con = "../outputs/first_stage_sibship.tex"
+)
+
+```
+
+```{r}
+names(dhs2)
+```
