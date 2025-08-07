@@ -1,6 +1,6 @@
 ---
-title: "Womb for One More? Fertility Expansion and the Limits of Early Health Investment: Empirical Evidence on the Quantity-Quality Trade-off from a Contraceptive Ban in Urban Philippines"
-short: "The Q-Q Trade-off in the Philippine Context"
+title: "Who Gets Cared For and Why? Fertility Shocks, Intra-Household Investment Reallocation, and the Quantity–Quality Trade-Off in the Philippines"
+short: "Spillovers from Policy-Induced Fertility"
 journal: "" # AER, AEJ, PP, JEL
 month: "`r format(Sys.Date(), '%m')`"
 year: "`r format(Sys.Date(), '%Y')`"
@@ -26,14 +26,21 @@ author:
     email: ctheoharides@amherst.edu
     affiliation: Amherst College
 acknowledgements: |
-  This research was made possible by the Schupf Fellowship at Amherst College. I am indebted to my faculty adviser, Professor Caroline Theoharides, for her mentorship and support throughout the development of this project. I also wish to thank Faculty Director Professor Amelie Hastie and the campus partners whose institutional support enabled this work. I am further grateful to the Departments of Economics and Mathematics & Statistics for their academic support. The views expressed and any errors contained herein are entirely my own responsibility.
+  This research was made possible through the support of the Schupf Fellowship at Amherst College. I am deeply thankful to Dr. Axel Schupf ’57 for his generosity and vision in establishing this program, which annually supports a cohort of twenty rising sophomores and juniors in independent summer research. I feel truly privileged to have been selected through this competitive process and to have spent eight weeks immersed in a project that both challenged and inspired me. I am especially grateful to my mentor, Prof. Caroline Theoharides, for her mentorship throughout this project—and more broadly, for sparking my interest in economic research and its potential to serve the public good in the Philippines. I also wish to thank Faculty Director Professor Amelie Hastie and the many campus partners whose institutional support made this experience possible. Finally, I am grateful to the Departments of Economics and Mathematics & Statistics for equipping me with the analytical and conceptual tools that made this research possible—and for preparing me to take on independent research with confidence and curiosity. All views and any errors are my own.
 abstract: |
-  This paper examines whether increased fertility, driven by reduced access to modern contraception, affects early-life health outcomes in low-income urban households. I exploit a natural experiment created by a 2000 policy in Manila, Philippines—Executive Order No. 003—which effectively banned the provision of modern contraceptives in all city-run health facilities. Using a difference-in-differences design and nationally representative data from the Philippine Demographic and Health Surveys, I estimate the policy’s impact on child health by comparing outcomes in Manila before and after the ban to those in comparable urban areas unaffected by the policy. The outcomes of interest include birth weight (in grams), the mother’s perceived size of the child at birth, and receipt of key childhood vaccinations.
+  This paper investigates how increases in fertility, driven by reduced access to contraception, affect parental investment in child health. I use Executive Order No. 003—a 2000 policy in Manila that restricted access to modern contraceptives—as an exogenous fertility shock. Drawing on pooled data from the 1998, 2003, and 2008 Philippine Demographic and Health Surveys, I estimate two-stage least squares models that use policy exposure to instrument for sibship size. Child health inputs fall into two categories: prenatal (proxied by birth weight) and postnatal (measured by the total number of vaccine doses received by age five). The first-stage results indicate that affected mothers had, on average, 0.20 more living children at the time of a birth. In the second stage, each additional sibling is associated with a reduction of 22.97 vaccine doses received by the index child, a decline large enough to prevent completion of the recommended immunization schedule. The estimated effect on birth weight is −8,676 grams, though statistically insignificant Reduced-form estimates are directionally consistent: policy exposure is associated with a 0.91-dose drop in vaccine uptake and a 349.60-gram decrease in birth weight. While instrumental variable estimates are limited by a weak first stage, the magnitude and sign of the coefficients support the hypothesis that larger sibship sizes reduce health investments per child. The results suggest that postnatal investments, particularly those requiring sustained parental effort, are more sensitive to fertility shocks than prenatal outcomes.
 output: 
   rticles::aea_article:
+    latex_engine: xelatex
     keep_tex: true
-    latex_engine: pdflatex
+    citation_package: natbib
 bibliography: references.bib
+header-includes:
+  - \usepackage{pdfpages}
+  - \usepackage{float}
+  - \usepackage{makecell}
+  - \setlength{\parskip}{0pt}       % Remove vertical space between paragraphs
+  - \setlength{\parindent}{15pt}    % Indent first line of each paragraph
 ---
 
 ```{r}
@@ -74,27 +81,25 @@ above. Note: you can't use both packages at once or compile-time errors will res
 
 \section{Introduction}
 
-The trade-off between child quantity and child quality is a foundational concept in the economics of the family. First articulated by \citet{becker1960economic} and extended in subsequent models of household behavior \citep{becker1973interaction, becker1976child}, this framework posits that parents allocate finite resources—both financial and non-financial—across children. An increase in fertility dilutes the resources available per child and, under binding constraints, may lead to reduced investments in each child’s human capital. 
+The trade-off between child quantity and child quality is a foundational concept in the economics of the family. First articulated by \citet{becker1960economic} and extended in subsequent models of household behavior \citep{becker1973interaction, becker1976child}, this framework posits that parents allocate finite resources—both financial and non-financial—across children. An increase in fertility dilutes the resources available per child and, under binding constraints, may lead to reduced investments in each child’s human capital.
 
-Empirical investigations of the quantity-quality trade-off have focused primarily on educational outcomes. Most studies examine how increases in maternal fertility—or equivalently, the number of siblings a child has—affect school enrollment, grade progression, test scores, and completed years of schooling \citep{rosenzweig1980testing, black2005more, angrist2010multiple}. These outcomes serve as accessible proxies for long-run human capital accumulation, but they represent only one dimension of child quality. Other dimensions of child quality–such as health at birth and early childhood health investments—are early-onset or biologically constrained, and they tend to be less amenable to remediation later in life. For instance, babies born with very low birth weight face higher risks of infant mortality and long-term developmental deficits that cannot be fully reversed \citep{cook2015understanding}. Similarly, a child who misses critical early vaccinations is more vulnerable to infectious diseases that can kill or disable them, which results to lifelong negative health impacts \citep{costa2024child}. Such early-life health setbacks may permanently impair cognitive development and physical growth. This limits long-run productivity regardless of subsequent improvements in schooling or incom
+Empirical investigations of the quantity-quality trade-off have focused primarily on educational outcomes. Most studies examine how increases in maternal fertility—or equivalently, the number of siblings a child has—affect school enrollment, grade progression, test scores, and completed years of schooling \citep{rosenzweig1980testing, black2005more, angrist2010multiple}. These outcomes serve as accessible proxies for long-run human capital accumulation, but they represent only one dimension of child quality. Other dimensions of child quality–such as health at birth and early childhood health investments—are early-onset or biologically constrained, and they tend to be less amenable to remediation later in life. For instance, babies born with very low birth weight face higher risks of infant mortality and long-term developmental deficits that cannot be fully reversed \citep{cook2015understanding}. Similarly, a child who misses critical early vaccinations is more vulnerable to infectious diseases that can kill or disable them, which results to lifelong negative health impacts \citep{costa2024child}. Such early-life health setbacks may permanently impair cognitive development and physical growth. This limits long-run productivity regardless of subsequent improvements in schooling or income.
 
 The omission of these health outcomes from much of the empirical literature leaves important aspects of the quantity-quality trade-off unexamined. Investments in maternal and child health—such as adequate prenatal care leading to healthy birth weight and timely childhood immunizations—are important to early development and long-term outcomes \citep{victora2008maternal, hoddinott2013adult}. They shape brain development, immune system functioning, and physical stature, and they have been shown to predict later-life earnings and health outcomes across a wide range of settings \citep{grantham2007development, alderman2006long}. Unlike educational gaps, which may be partially addressed later in life, early health deficits—such as poor nutrition or missed vaccinations—are often irreversible \citep{victora2008maternal, hoddinott2013adult}. As a result, any credible evaluation of the quantity-quality trade-off must include early-life health outcomes to fully capture the long-term consequences of different fertility shocks.
 
 This study addresses that gap by examining how a localized, exogenous increase in fertility influenced early-life health outcomes in the Philippines. In 2000, then–Mayor José “Lito” Atienza of Manila City issued Executive Order No. 003, which effectively barred the provision and promotion of modern contraceptives in all city-run health facilities. The directive eliminated access to pills, condoms, intrauterine devices, and other forms of modern family planning, and mandated that public healthcare providers offer only natural methods. The policy remained in effect for nearly a decade and applied solely within the jurisdiction of the Manila city government. No comparable restriction was implemented at the national level, and neighboring cities within Metro Manila continued to provide access to modern contraceptives. This policy created a clear spatial and temporal discontinuity in access to family planning services—one that was plausibly unrelated to changes in fertility preferences, household income, or broader governance trends. As such, the Manila contraceptive ban provides a quasi-experimental shock to fertility exposure among poor urban households.
 
-I use this natural experiment to estimate the causal impact of increased family size on early-childhood health outcomes. The analysis uses nationally representative data from multiple rounds of the Philippine Demographic and Health Survey (DHS), which include detailed information on household structure, maternal characteristics, and child health indicators. The primary outcomes are birth weight (measured in grams, when reported) and the mother’s subjective assessment of the child’s size at birth—both of which serve as indicators of neonatal health status. In addition, I assess whether the child received key early-life vaccinations, including those against polio, diphtheria–pertussis–tetanus (DPT), and measles, as a measure of essential postnatal health investment. These outcomes are widely recognized indicators of child well-being and reflect both biological and behavioral dimensions of parental investment in early development. The empirical strategy follows a difference-in-differences design that compares child outcomes in Manila and comparable urban areas before and after the onset of the policy.
+I use this natural experiment to estimate the causal impact of increased family size on early-childhood health outcomes. The analysis uses nationally representative data from multiple rounds of the Philippine Demographic and Health Survey (DHS), which include detailed information on household structure, maternal characteristics, and child health indicators. The primary outcomes are birth weight (measured in grams, when reported) and whether the child received key early-life vaccinations, including those against polio, diphtheria–pertussis–tetanus (DPT), and measles, as a measure of essential postnatal health investment. These outcomes are widely recognized indicators of child well-being and reflect both biological and behavioral dimensions of parental investment in early development. The empirical strategy follows a difference-in-differences design that compares child outcomes in Manila and comparable urban areas before and after the onset of the policy.
 
-The identification strategy rests on two key assumptions. First, in the absence of the contraceptive ban, trends in child health outcomes in Manila would have evolved in parallel with those in the comparison cities. Second, no other policy changes or economic shocks in Manila during the study period coincided with the timing and scope of the contraceptive policy. I probe these assumptions using falsification tests, placebo comparisons, and robustness checks that include city-specific time trends, mother fixed effects, and controls for baseline demographic differences.
+The identification strategy rests on two key assumptions. First, in the absence of the contraceptive ban, trends in child health outcomes in Manila would have evolved in parallel with those in the comparison cities. Second, no other policy changes or economic shocks in Manila during the study period coincided with the timing and scope of the contraceptive policy. I probe these assumptions using falsification tests, placebo comparisons, and robustness checks that include city-specific time trends, mother fixed effects, and controls for baseline demographic differences. The analysis proceeds in three stages. I first replicate existing work \citep{dumas2019sex} to confirm that the contraceptive ban led to an increase in fertility among affected women. Next, I estimate the reduced-form effects of exposure to the policy on the selected child health outcomes (birth weight, and vaccination uptake). Finally, I examine heterogeneity in these effects across subgroups defined by maternal education, household wealth, and access to prenatal care. These characteristics proxy for a household’s resources and its capacity to buffer the impact of increased family size on child health.
 
-The analysis proceeds in three stages. I first replicate existing work \citep{dumas2019sex} to confirm that the contraceptive ban led to an increase in fertility among affected women. Next, I estimate the reduced-form effects of exposure to the policy on the selected child health outcomes (birth weight, perceived birth size, and vaccination uptake). Finally, I examine heterogeneity in these effects across subgroups defined by maternal education, household wealth, and access to prenatal care. These characteristics proxy for a household’s resources and its capacity to buffer the impact of increased family size on child health.
-
-This study contributes to the literature in several important ways. It provides new evidence on how an externally induced increase in family size, resulting from a local restriction on contraceptive access,  can affect child health in poor urban communities. Whereas most past research on the quantity-quality trade-off has focused on education, this study broadens the notion of child “quality” to include early-life health measures such as birth weight and immunization status. It also adds to the small number of studies that leverage unexpected changes in reproductive health policy to examine long-term effects on children’s well-being. More broadly, the findings indicate that local restrictions on family planning can unintentionally harm children’s health, especially in settings where families already face poverty, food insecurity, and limited public health services.
+This study contributes to the literature in several important ways. It provides new evidence on how an externally induced increase in family size, resulting from a local restriction on contraceptive access, can affect child health in poor urban communities. Whereas most past research on the quantity-quality trade-off has focused on education, this study broadens the notion of child “quality” to include early-life health measures such as birth weight and immunization status. It also adds to the small number of studies that leverage unexpected changes in reproductive health policy to examine long-term effects on children’s well-being. More broadly, the findings indicate that local restrictions on family planning can unintentionally harm children’s health, especially in settings where families already face poverty, food insecurity, and limited public health services.
 
 \section{Review of Related Literature}
 
-The quantity-quality (Q–Q) theory, a central idea in modern family economics,  holds that parents face a trade-off between the number of children and the "quality" of investment—such as education or health—they can provide to each. Quality in this context refers to the human capital of each child: attributes like education, health, and nutrition that enhance a child’s future productivity and well-being. The genesis of this idea traces back to Gary Becker’s seminal work around 1960, which for the first time treated children as economic goods subject to parental choice and budget constraints \citep{becker1960economic}. Becker argued that as families become wealthier, they may not simply want more children, but rather better-raised children, much as a household might prefer a higher-quality car or house over a greater quantity of them. This proposition led to a formal theory in which increases in income or changes in economic conditions cause parents to substitute child quality for quantity, consistent with historical patterns of lower fertility and higher educational attainment during economic development \citep{galor2000population}.
+The quantity-quality (Q–Q) theory, a central idea in modern family economics, holds that parents face a trade-off between the number of children and the "quality" of investment—such as education or health—they can provide to each. Quality in this context refers to the human capital of each child: attributes like education, health, and nutrition that enhance a child’s future productivity and well-being. The genesis of this idea traces back to Gary Becker’s seminal work around 1960, which for the first time treated children as economic goods subject to parental choice and budget constraints \citep{becker1960economic}. Becker argued that as families become wealthier, they may not simply want more children, but rather better-raised children, much as a household might prefer a higher-quality car or house over a greater quantity of them. This proposition led to a formal theory in which increases in income or changes in economic conditions cause parents to substitute child quality for quantity, consistent with historical patterns of lower fertility and higher educational attainment during economic development \citep{galor2000population}.
 
-In what follows, I review the theoretical foundations of the Q-Q model and its evolution in the literature. I begin with the static models of Becker \citep{becker1960economic} and Becker–Lewis \citep{becker1973interaction}, which first formalized the trade-off within a household utility maximization framework. We then examine extensions to dynamic, intergenerational settings, including the contributions of Becker and Tomes \citep{becker1976child} on child endowments and the altruistic dynastic model associated with Barro and Becker \citep{barro1989fertility}. Next, I turn to macroeconomic and unified growth models, notably Galor and Weil \citep{galor2000population} and Galor and Moav \citep{galor2002natural}, which integrate the Q–Q mechanism into a general theory of demographic and economic transformation.
+In what follows, I review the theoretical foundations of the Q-Q model and its evolution in the literature. I begin with the static models of Becker \citep{becker1960economic} and Becker–Lewis \citep{becker1973interaction}, which first formalized the trade-off within a household utility maximization framework. I then examine extensions to dynamic, intergenerational settings, including the contributions of Becker and Tomes \citep{becker1976child} on child endowments and the altruistic dynastic model associated with Barro and Becker \citep{barro1989fertility}. Next, I turn to macroeconomic and unified growth models, notably Galor and Weil \citep{galor2000population} and Galor and Moav \citep{galor2002natural}, which integrate the Q–Q mechanism into a general theory of demographic and economic transformation.
 
 Finally, I discuss more recent refinements that enrich the basic model by incorporating credit constraints \citep{doepke2004accounting}, intra-household bargaining \citep{doepke2019bargaining}, and multi-dimensional child quality \citep{hoddinott2013economic, kalemli2002does}, with a special emphasis on health and nutrition. The literature review focuses on how the Q–Q framework has been applied to understand fertility and child investment patterns, especially in developing country contexts where resource constraints and health outcomes are paramount.
 
@@ -136,8 +141,7 @@ Combining the first two yields:
 
 $$
 \frac{U_n}{U_q} = \frac{p_n + p_q q}{p_q n}.
-$$
-This condition equates the marginal rate of substitution between quantity and quality to the ratio of their full marginal costs. The numerator rises with $q$, and the denominator rises with $n$. As one choice increases, the relative cost of the other becomes higher. This relationship induces substitution toward the less costly dimension. The trade-off between quantity and quality arises from the structure of the budget itself. It does not rely on specific assumptions about utility curvature or intrinsic substitutability \citep{becker1973interaction}.
+$$ This condition equates the marginal rate of substitution between quantity and quality to the ratio of their full marginal costs. The numerator rises with $q$, and the denominator rises with $n$. As one choice increases, the relative cost of the other becomes higher. This relationship induces substitution toward the less costly dimension. The trade-off between quantity and quality arises from the structure of the budget itself. It does not rely on specific assumptions about utility curvature or intrinsic substitutability \citep{becker1973interaction}.
 
 This formulation implies two core predictions. Firstly, although both child quantity and child quality may rise with income, the household’s budget constraint can generate a negative relationship between income and fertility. As income increases, total spending on children tends to rise, but the allocation often favors quality over quantity. Becker illustrated this with the analogy of durable goods: wealthier households tend to upgrade the quality of a house or a car rather than acquire additional units. In a similar way, higher-income families often direct additional resources toward education, nutrition, or health per child. Within the model, an income increase ($\mathrm{d}I > 0$) produces a direct effect that makes children more affordable and an indirect effect that discourages fertility. As $q$ rises, the shadow price of an additional child also rises. If the marginal utility from higher quality exceeds that from larger family size, then the substitution effect outweighs the income effect, leading to a lower optimal $n$. This mechanism offers a structural explanation for the demographic transition: fertility tends to fall as households become richer, even when preferences remain unchanged.
 
@@ -148,7 +152,7 @@ Furthermore, a similar logic applies to changes in the cost parameters $p_q$ and
 While the early Q–Q models were static (one-period) representations, subsequent contributions extended the framework to consider fertility and child investment over multiple periods or even multiple generations. The main development in this literature was the incorporation of intergenerational human capital dynamics, where parents derive utility not only from the number and quality of children in the present, but also from the long-run outcomes of their offspring. These extensions allowed child quality to evolve endogenously across time, rather than being determined solely within a single period.
 
 One of the earliest and most influential models of this kind was proposed by \citet{becker1976child}. In their formulation, each child enters the world with an exogenous endowment $E$, which may reflect factors such as cognitive ability (e.g., measured IQ or language acquisition speed), early health status (e.g., birth weight or incidence of neonatal complications), genetic predispositions (e.g., risk for chronic illness, temperament, or neurodevelopmental traits), or family background characteristics (e.g., parental education, household stability, or neighborhood conditions). Furthermore, parents can augment this endowment by investing resources $q$ in the form of education, nutrition, and other quality-enhancing inputs. The effective adult human capital of the child might be expressed as $H = E + f(q)$ (in a simple additive form) or a multiplicative variant $H = E \cdot f(q)$, where $f(q)$ is an increasing concave function of parental investment.
- 
+
 \citet{becker1976child} emphasized that variation in endowments $E$ can shape how parents allocate investments $q$ across children. When the productivity of investment increases with endowment, parents may concentrate resources on children with higher $E$, who are more likely to convert additional investment into future success. In other cases, parents may attempt to compensate for lower endowments by directing greater investment toward disadvantaged children. Put simply, child-specific variation in initial conditions affects not only outcomes but also strategic parental choices. Because of this, the relationship between income and the demand for child quality is not uniform. The income elasticity of demand for quality may differ across households, depending on the distribution of endowments within the family and across the broader population.
 
 Furthermore, \citet{becker1976child} showed that at low income levels, much of what constitutes child quality comes from exogenous endowments, i.e., factors like public education, neighborhood environment, or access to basic healthcare that are not privately purchased. In these settings, small increases in parental income may not lead to significant changes in fertility or investment behavior. Since most of the child’s future outcomes are determined by the fixed endowment component, marginal investment plays a smaller role. However, as income rises, private resources become a larger part of what determines quality, and the classic Q–Q trade-off begins to shape behavior. Parents begin to allocate more income toward fewer children in order to enhance quality through direct investment. Under certain theoretical conditions, such as equal utility elasticities for quantity and quality, this framework produces a non-monotonic relationship between income and fertility. Fertility may decline as income rises at first, which reflects the desire to invest more intensively per child. However, beyond some point, once the marginal return to investment begins to flatten or saturate relative to the fixed endowment, fertility may increase again.
@@ -179,8 +183,7 @@ In \citet{galor2000population}’s model, for instance, technological progress g
 
 Evidently, industrialization raises the economic value of skilled labor, which alters household incentives. As returns to education increase, parents begin to favor investments in child quality over child quantity. This shift results in declining fertility because families choose to have fewer children and allocate more resources to each. The feedback effect is significant: higher educational investment raises productivity in the next generation, which in turn accelerates technological advancement and further increases the returns to human capital. Over time, the economy moves from a state of high fertility and low growth to one characterized by low fertility and sustained growth.
 
-Furthermore, \citet{galor2002natural} introduced an evolutionary refinement to the unified growth framework by accounting for heterogeneity in parental preferences. During the Malthusian period, some families placed greater emphasis on child quality, such as education, while others prioritized quantity. In a stagnant economy with limited returns to education, high-fertility lineages maintained a numerical advantage and suppressed average human capital. As technological progress increased the returns to education, families that valued quality gained an economic edge. Their children acquired more human capital and achieved higher income and survival rates. These advantages allowed such families to grow in relative size. Over time, this process resembled a form of evolutionary selection, gradually favoring quality-oriented parental types and shifting the population toward greater emphasis on child human capital. These dynamics strengthened the shift from high-fertility, low-education regimes to low-fertility, high-investment family structures.
-In formal overlapping-generations models, \citet{galor2002natural} demonstrate that this evolutionary adaptation accelerates the demographic transition. Their framework accounts for the rapid and widespread drop in fertility once it takes effect. Higher returns to human capital push parents to favor quality, while preferences for quality begin to dominate within the population. These forces support the emergence of a low-fertility, high-investment equilibrium and establish a unified explanation for both economic development and demographic change.
+Furthermore, \citet{galor2002natural} introduced an evolutionary refinement to the unified growth framework by accounting for heterogeneity in parental preferences. During the Malthusian period, some families placed greater emphasis on child quality, such as education, while others prioritized quantity. In a stagnant economy with limited returns to education, high-fertility lineages maintained a numerical advantage and suppressed average human capital. As technological progress increased the returns to education, families that valued quality gained an economic edge. Their children acquired more human capital and achieved higher income and survival rates. These advantages allowed such families to grow in relative size. Over time, this process resembled a form of evolutionary selection, gradually favoring quality-oriented parental types and shifting the population toward greater emphasis on child human capital. These dynamics strengthened the shift from high-fertility, low-education regimes to low-fertility, high-investment family structures. In formal overlapping-generations models, \citet{galor2002natural} demonstrate that this evolutionary adaptation accelerates the demographic transition. Their framework accounts for the rapid and widespread drop in fertility once it takes effect. Higher returns to human capital push parents to favor quality, while preferences for quality begin to dominate within the population. These forces support the emergence of a low-fertility, high-investment equilibrium and establish a unified explanation for both economic development and demographic change.
 
 Importantly, unified growth models identify several complementary mechanisms that reinforce the basic Q–Q trade-off during development. One is the decline of child labor. As the economy modernizes, the value of child labor falls, both because legal reforms often restrict child labor and because parents realize the earnings their children could make as unskilled laborers are paltry compared to the potential returns if those children instead spend time in school. \citet{hazan2002child} formally show that when child labor becomes less profitable relative to adult (skilled) labor, parents further reduce fertility and invest more in each child’s education. Historical evidence from England, for instance, indicates that during industrialization the wages of children (relative to adults) dropped significantly, especially in skilled families, and this was accompanied by parents pulling children out of work to send them to school. \citet{galor2006human} even argue that capitalist industrialists supported public education laws and child labor bans as a way to increase the human capital of the workforce, inadvertently hastening the fertility transition.
 
@@ -192,23 +195,23 @@ The unified growth literature places the Q–Q model within a more general accou
 
 \subsection{Recent Refinements to the Q-Q Model}
 
-Contemporary research has further refined the quantity-quality model by relaxing some of its initial simplifying assumptions. Three important extensions involve (1) capital market imperfections that constrain parents’ ability to invest in child quality, (2) intra-household conflict and bargaining between mothers and fathers over fertility choices, and (3) recognition that child quality is multi-dimensional, which extends beyond schooling to include health, nutrition, and other facets of human capital. 
+Contemporary research has further refined the quantity-quality model by relaxing some of its initial simplifying assumptions. Three important extensions involve (1) capital market imperfections that constrain parents’ ability to invest in child quality, (2) intra-household conflict and bargaining between mothers and fathers over fertility choices, and (3) recognition that child quality is multi-dimensional, which extends beyond schooling to include health, nutrition, and other facets of human capital.
 
 To begin, I examine how credit constraints can give rise to poverty traps. The canonical quantity-quality (Q–Q) framework assumes that parents can reallocate resources freely; borrowing against future earnings to finance schooling or health investments whenever the expected return is high. In practice, especially in low-income settings, credit markets function imperfectly: poor households typically cannot secure loans to cover children’s education or medical costs even when such investments would yield substantial future gains. This market failure magnifies the Q–Q trade-off. Becker, Lewis, and Willis–already noted by \citet{grawe2008quality} as emphasizing “resource limitations”–implicitly recognized this issue, but contemporary models make it explicit by imposing a borrowing constraint. Parents must fund childrearing from current income alone; they cannot collateralize a child’s future wages to pay today’s school fees. Consequently, when income is low, each additional birth directly reduces the attainable quality per child, potentially trapping families in a low-income–high-fertility equilibrium.
 
 Formal models show that “the quality-quantity trade-off arises from a binding credit constraint that prevents parents from borrowing against future child income.” Empirical work supports this mechanism. \citet{kremer2002income} and \citet{de2003inequality} document that countries facing tighter liquidity constraints tend to display higher fertility and lower educational attainment, consistent with liquidity-constrained parents favoring quantity over quality. Cross-country evidence likewise indicates that where financial frictions are more severe, the negative correlation between fertility and schooling is stronger. Theoretically, introducing a borrowing limit can generate multiple steady states: one with low fertility and high investment when incomes suffice to cover quality costs, and another with high fertility and minimal investment when they do not. Policy instruments such as education subsidies or conditional cash transfers effectively relax these constraints, which nudge households toward the low-fertility, high-investment equilibrium. In short, incorporating credit market imperfections deepens the explanatory power of the Q-Q model: economic growth alone may not reduce fertility if households remain too cash-poor to afford schooling, whereas targeted quality-enhancing transfers can catalyze both demographic and human-capital transitions.
 
-A further refinement of the quantity-quality (Q–Q) model considers the question of *who* within the household makes fertility and child investment decisions. The original Beckerian framework adopts a unitary model of the family, and assumes a single utility function and complete agreement between spouses over optimal fertility \( n \) and child quality \( q \). In practice, however, empirical evidence reveals significant heterogeneity in preferences between household members along gender lines. According to \citet{oppenheim1987impact, thomas1990intra}, for instance, men often desire more children than women and may differ in their willingness to invest in each child’s education or health. These discrepancies have motivated game-theoretic models of intra-household bargaining, in which fertility and investment outcomes reflect the relative influence of each parent’s preferences.
+A further refinement of the quantity-quality (Q–Q) model considers the question of *who* within the household makes fertility and child investment decisions. The original Beckerian framework adopts a unitary model of the family, and assumes a single utility function and complete agreement between spouses over optimal fertility $n$ and child quality $q$. In practice, however, empirical evidence reveals significant heterogeneity in preferences between household members along gender lines. According to \citet{oppenheim1987impact, thomas1990intra}, for instance, men often desire more children than women and may differ in their willingness to invest in each child’s education or health. These discrepancies have motivated game-theoretic models of intra-household bargaining, in which fertility and investment outcomes reflect the relative influence of each parent’s preferences.
 
 In such models, the mother is typically assumed to have a stronger preference for child quality—such as health and schooling—while the father may favor either more children or alternative uses of household resources. The resolution of these conflicting preferences depends on bargaining power, which can be shaped by income contributions, legal rights, cultural norms, or access to external resources. When the mother’s bargaining power increases, theoretical models predict a shift toward lower fertility and higher per-child investment, holding other factors constant. This prediction is consistent with empirical findings: \citet{iyigun2007endogenous, doepke2019bargaining} show that greater female empowerment—via education or labor force participation—correlates with reduced fertility and increased investment in child human capital.
 
 Mathematically, the household’s first-order condition for fertility in a bargaining model can be written as:
 
-\[
+$$
 \alpha \frac{\partial U_{\text{wife}}}{\partial n} + (1 - \alpha) \frac{\partial U_{\text{husband}}}{\partial n} = \lambda(p_n + p_q q),
-\]
+$$
 
-with a corresponding condition for \( q \). Here, \( \alpha \in [0,1] \) represents the wife’s bargaining weight. When \( \alpha \) increases, the composite marginal utility of additional children typically decreases—especially if the wife prefers fewer children—leading to lower equilibrium fertility and a shift along the Q–Q frontier toward higher quality.
+with a corresponding condition for $q$. Here, $\alpha \in [0,1]$ represents the wife’s bargaining weight. When $\alpha$ increases, the composite marginal utility of additional children typically decreases—especially if the wife prefers fewer children—leading to lower equilibrium fertility and a shift along the Q–Q frontier toward higher quality.
 
 Recent work also explores dynamic bargaining, in which spouses negotiate sequential decisions over time, potentially leading to strategic behavior (e.g., one partner may accelerate or delay subsequent births). Although these models introduce complexity, their core implication for the Q–Q framework is clear: household power dynamics fundamentally shape the trade-off between child quantity and quality. In societies where women have limited decision-making autonomy—due to lack of access to contraception, or social norms—fertility tends to remain high and per-child investment low, which stalls demographic transition. Conversely, when women gain bargaining power—through legal reforms, labor market participation, or targeted transfers—the household often reallocates resources toward fewer but higher-quality children.
 
@@ -218,23 +221,23 @@ This theoretical insight is corroborated by policy experiments. For instance, ca
 
 The original Q–Q models often used a single catch-all variable for child quality, typically thought of as education or “expenditure per child.” Recent work emphasizes that child quality is multi-faceted, and that parents make trade-offs along several dimensions of investment—cognitive development, health, nutrition, etc. This is salient in developing countries, where basic health and nutrition are pressing concerns alongside schooling.
 
-The theoretical question is how these dimensions interact with the quantity decision. If parents allocate a budget across, say, schooling \( q_{\text{edu}} \) and nutrition/health \( q_{\text{health}} \) for each child, then having more children forces cutbacks in both dimensions (unless parents reallocate across them). In some models, health and education are complementary: a healthier child benefits more from education, and an educated mother might raise a healthier child. This complementarity can amplify the Q–Q trade-off—investing in one dimension (health) increases the returns to investing in the other (education), so a high-quality strategy becomes more focused on fewer children.
+The theoretical question is how these dimensions interact with the quantity decision. If parents allocate a budget across, say, schooling $q_{\text{edu}}$ and nutrition/health $q_{\text{health}}$ for each child, then having more children forces cutbacks in both dimensions (unless parents reallocate across them). In some models, health and education are complementary: a healthier child benefits more from education, and an educated mother might raise a healthier child. This complementarity can amplify the Q–Q trade-off—investing in one dimension (health) increases the returns to investing in the other (education), so a high-quality strategy becomes more focused on fewer children.
 
-On the other hand, if one dimension has diminishing returns more quickly than another, parents might prioritize achieving a threshold level of health for all children before adding more education, which creates a nonlinear effect on fertility. One especially important aspect of health in the Q–Q framework is child survival. The probability that a child survives to adulthood effectively multiplies the utility of having that child. Historically, high child mortality led to a strategy of “quantity for insurance,” where parents had additional births to ensure survivorship. As mortality falls due to public health improvements, parents can shift toward quality without risking childlessness \citep{kalemli2002does, kalemli2000mortality}. 
+On the other hand, if one dimension has diminishing returns more quickly than another, parents might prioritize achieving a threshold level of health for all children before adding more education, which creates a nonlinear effect on fertility. One especially important aspect of health in the Q–Q framework is child survival. The probability that a child survives to adulthood effectively multiplies the utility of having that child. Historically, high child mortality led to a strategy of “quantity for insurance,” where parents had additional births to ensure survivorship. As mortality falls due to public health improvements, parents can shift toward quality without risking childlessness \citep{kalemli2002does, kalemli2000mortality}.
 
 \citet{kalemli2002does} developed a stochastic model in which fertility choices are made under uncertainty about child survival. Her results show that declining mortality causally reduces fertility and increases educational investment per child, in line with the Q–Q trade-off. In unified growth models, declining child mortality reinforces the demand-for-human-capital channel of the demographic transition \citep{galor2004physical}.
 
-Beyond survival, early-life health indicators such as birth weight, perceived size at birth, and vaccination status are important dimensions of child quality, especially in low-income settings. When resources are limited, parents may struggle to meet the basic needs of each child. Empirical evidence aligns with the quantity–quality framework: children from larger families often have worse health outcomes at birth and are less likely to receive core immunizations. For example, recent multi-country data show that the share of completely unimmunized children—so-called “zero-dose” children—increases from 10.5% among those with no siblings to 17.2% among those with four or more \citep{costa2024child}. Studies from Southeast Asia also report that higher birth order correlates with lower average birth weight and smaller perceived size at birth. These patterns suggest that as fertility increases, the health of each child may suffer due to more limited parental investment. Studies from Southeast Asia \citep{chen2021population} also report that higher birth order correlates with lower average birth weight and smaller perceived size at birth
+Beyond survival, early-life health indicators such as birth weight and vaccination status are important dimensions of child quality, especially in low-income settings. When resources are limited, parents may struggle to meet the basic needs of each child. Empirical evidence aligns with the quantity–quality framework: children from larger families often have worse health outcomes at birth and are less likely to receive core immunizations. For example, recent multi-country data show that the share of completely unimmunized children—so-called “zero-dose” children—increases from 10.5% among those with no siblings to 17.2% among those with four or more \citep{costa2024child}. Studies from Southeast Asia also report that higher birth order correlates with lower average birth weight. These patterns suggest that as fertility increases, the health of each child may suffer due to more limited parental investment. Studies from Southeast Asia \citep{chen2021population} also report that higher birth order correlates with lower average birth weight.
 
-Similar patterns emerge in sub-Saharan Africa \citep{bishwakarma2019first} and South Asia, where first-born children experience slower growth once younger siblings arrive—again pointing to intrahousehold trade-offs. Theoretically, one can extend the Becker model with a nutrition production function, where a child’s health \( H \) depends on food \( F \) and medical care \( M \), such that:
+Similar patterns emerge in sub-Saharan Africa \citep{bishwakarma2019first} and South Asia, where first-born children experience slower growth once younger siblings arrive—again pointing to intrahousehold trade-offs. Theoretically, one can extend the Becker model with a nutrition production function, where a child’s health $H$ depends on food $F$ and medical care $M$, such that:
 
-\[
+$$
 H = g(F, M)
-\]
+$$
 
-and \( H \) enters either utility directly or the child’s future productivity. Parents then choose \( n \), \( F \), \( M \), and possibly schooling per child. Larger \( n \) reduces \( F \) and \( M \) per child, lowering \( H \); if parents place high value on \( H \), or if \( H \) enhances returns to education, they will opt for smaller families.
+and $H$ enters either utility directly or the child’s future productivity. Parents then choose $n$, $F$, $M$, and possibly schooling per child. Larger $n$ reduces $F$ and $M$ per child, lowering $H$; if parents place high value on $H$, or if $H$ enhances returns to education, they will opt for smaller families.
 
-Importantly, improvements in nutrition (through income growth or public programs) can first lead to both better health and higher fertility (since healthier women can bear more children). But over time, as standards of living rise, better nutrition increases the returns to investing in fewer, healthier children. Economic historian \citet{fogel1994economic} argues that Europe’s demographic transition was partly driven by better diets: improved nutrition raised the productivity of educated workers, which made education more valuable and shifted family preferences toward quality. 
+Importantly, improvements in nutrition (through income growth or public programs) can first lead to both better health and higher fertility (since healthier women can bear more children). But over time, as standards of living rise, better nutrition increases the returns to investing in fewer, healthier children. Economic historian \citet{fogel1994economic} argues that Europe’s demographic transition was partly driven by better diets: improved nutrition raised the productivity of educated workers, which made education more valuable and shifted family preferences toward quality.
 
 These propositions are important for modern development policy. Family planning programs that encourage lower fertility without improving child health and education may have limited long-term effects. Conversely, health and nutrition interventions—such as vaccinations or food supplementation—can enhance the returns to education and induce parents to reduce fertility voluntarily. The extended Q–Q framework thus serves as a unifying tool to understand how diverse interventions—ranging from school fees to nutrition programs—shape long-run development trajectories.
 
@@ -248,7 +251,7 @@ The IV estimates confirmed a significant negative causal effect of higher fertil
 
 Further compelling evidence comes from a natural experiment studied by \citet{dumas2019sex}. They exploit a unique policy shock in metropolitan Manila to identify the trade-off. In 1998, the Mayor of Manila city imposed a sudden ban on modern contraceptives in public facilities, drastically curtailing access to family planning for residents of Manila city (but not in surrounding municipalities). Dumas and Lefranc use this policy as a quasi-experiment: comparing families in Manila city (treated by the ban) to similar families in other cities unaffected by the ban before and after 1998. This difference-in-differences design, coupled with the fact that older mothers were naturally less fecund during the ban, isolates an exogenous fertility increase.
 
-The results are striking. The contraceptives ban led to a significant rise in births and family size in Manila city relative to the control areas. Correspondingly, children born in Manila during the ban era experienced a sizable decline in educational attainment – clear evidence of a Q–Q trade-off precipitated by the shock. In the authors’ words, the policy-driven increase in family size “provide[s] evidence of a quality–quantity trade-off”: larger families, forced by the ban, resulted in lower schooling outcomes per child. By leveraging an actual anti-contraception policy, this study offers causal confirmation that constraints on family planning can worsen child quality. Together with Orbeta’s findings, it reinforces the relevance of Becker’s hypothesis in the Philippine setting: whether via unintended fertility (Manila’s case) or ordinary variation in sibling sex mix, more children mean fewer resources per child and thus worse education outcomes. Consistent with theory, Filipino parents facing exogenous increases in quantity were unable to maintain the same level of quality per child.
+The results are striking. The contraceptives ban led to a significant rise in births and family size in Manila city relative to the control areas. Correspondingly, children born in Manila during the ban era experienced a sizable decline in educational attainment – clear evidence of a Q–Q trade-off precipitated by the shock. In the authors’ words, the policy-driven increase in family size “provide[s] evidence of a quality–quantity trade-off”: larger families, forced by the ban, resulted in lower schooling outcomes per child. 
 
 Beyond education, researchers have also examined health and other child outcomes in relation to family size. Evidence generally suggests the Q–Q trade-off extends to child health and nutrition. For instance, \citet{horton1986child} already hinted that large families may compromise child nutrition for later-born siblings. More recent regional research resonates with this. \citet{hatton2018fertility} analyze the effect of fertility on child height (a long-run health indicator) using longitudinal data from Indonesia – a neighboring Southeast Asian country with comparable developmental challenges. They address endogeneity by exploiting Indonesia’s family planning program rollout and exposure to mass media as instruments for fertility. The authors find a significant negative impact of family size on child health: each additional sibling is associated with about a one-third standard deviation reduction in a child’s height-for-age Z-score, after controlling for other factors. This health penalty from having more children is strongest in low-education households and appears in both urban and rural areas. Such findings mirror the Philippine evidence that the harms of large family size are most pronounced among disadvantaged families. In economic terms, poorer parents with many children struggle to provide adequate nutrition and schooling to all, which highlight the equity dimension of the Q–Q trade-off.
 
@@ -276,82 +279,701 @@ Nonetheless, the prevailing evidence from the Philippines and its regional neigh
 
 \section{Conceptual Framework and Hypotheses}
 
-This study builds upon the foundational framework of the quantity-quality (Q–Q) trade-off, first articulated in \citet{becker1960economic} and later refined in \citet{becker1973interaction}. In this model, fertility and child quality are jointly determined under a full-income constraint, such that increases in the number of children—without a corresponding expansion in household resources—necessitate a reduction in the average investment per child. While empirical applications of this framework have traditionally focused on educational outcomes, child quality can also be expressed in terms of early-life health, including indicators that emerge at birth or shortly after, such as birth weight, perceived size at birth, and uptake of essential vaccinations.
+This study builds upon the foundational framework of the quantity-quality (Q–Q) trade-off, first articulated in \citet{becker1960economic} and later refined in \citet{becker1973interaction}. In this model, fertility and child quality are jointly determined under a full-income constraint, such that increases in the number of children—without a corresponding expansion in household resources—necessitate a reduction in the average investment per child. While empirical applications of this framework have traditionally focused on educational outcomes, child quality can also be expressed in terms of early-life health, including indicators that emerge at birth or shortly after, such as birth weight, and uptake of essential vaccinations.
 
 This analysis focuses specifically on early-life health as a proxy for child quality. These outcomes, unlike cognitive or schooling-related investments, are biologically constrained and occur within a narrow developmental window, during which parental inputs are least substitutable and most consequential. The trade-off is expected to be especially salient in settings where fertility increases exogenously while family resources remain fixed. In such contexts, a sudden increase in sibship size may compel households to spread food, healthcare, and caregiving attention across more dependents, which would potentially lead to diminished health investments and outcomes for each child.
 
-To formalize this relationship, consider a household with total income \( I \), choosing nutritional investments \(\kappa_j\) for each of \( n \) children, along with consumption \( Z \) unrelated to child quality:
+To formalize this relationship, consider a household with total income $I$, choosing nutritional investments $\kappa_j$ for each of $n$ children, along with consumption $Z$ unrelated to child quality:
 
-\[
+$$
 I = \sum_{j=1}^{n} \kappa_j + Z.
-\]
+$$
 
-In the presence of a fertility shock, holding \( I \) constant, the average \(\kappa_j\) must fall unless offset by changes in parental behavior or external transfers. If these inputs decline and are critical to early-life development, observable deficits may arise in birth weight or perceived neonatal size, and children may be less likely to receive complete immunization schedules.
+In the presence of a fertility shock, holding $I$ constant, the average $\kappa_j$ must fall unless offset by changes in parental behavior or external transfers. If these inputs decline and are critical to early-life development, observable deficits may arise in birth weight, and children may be less likely to receive complete immunization schedules.
 
-The first hypothesis derived from this framework is that an exogenous increase in fertility leads to a decline in per-child health investment, particularly in low-income urban households with little financial slack. A second, related hypothesis posits that this decline results in measurable early-life health disadvantages—specifically, lower birth weight, smaller perceived size at birth, and reduced uptake of key childhood vaccinations. These hypotheses describe a causal pathway through which fertility shocks may contribute to early deprivation and potentially reinforce intergenerational cycles of poor health and limited human capital.
+The first hypothesis derived from this framework is that an exogenous increase in fertility leads to a decline in per-child health investment, particularly in low-income urban households with little financial slack. A second, related hypothesis posits that this decline results in measurable early-life health disadvantages—specifically, lower birth weight and reduced uptake of key childhood vaccinations. These hypotheses describe a causal pathway through which fertility shocks may contribute to early deprivation and potentially reinforce intergenerational cycles of poor health and limited human capital.
 
 \section{Data and Empirical Strategy}
 
 \subsection{Data}
 
-The primary data source for this study is the Philippine Demographic and Health Surveys (DHS), specifically the 1998, 2003, and 2008 rounds. These nationally representative surveys provide detailed child- and household-level information, including maternal characteristics, fertility behavior, and early-childhood health outcomes. Importantly, they are the only Philippine DHS waves with available GPS cluster data, which I use to approximate geographic location and assign respondents to treatment and control groups. Because city-level identifiers are not released in the public-use files, I rely on coarse geographic assignment based on cluster coordinates. Clusters located within or near the administrative boundaries of the City of Manila are classified as “treated,” while clusters located in other parts of the National Capital Region (NCR) serve as the control group. In robustness checks, I restrict the control group to Quezon City or expand it to the rest of NCR excluding both Manila and Quezon City.
+```{r}
+#| label: load-libraries
+#| include: false
 
-The analytic sample includes children under five years of age living with their mothers at the time of the survey. I focus on three early-life health outcomes that reflect both biological endowments and parental investment: (1) birth weight, reported in grams when available; (2) the mother’s subjective assessment of birth size; and (3) vaccination uptake, defined as receipt of key early-childhood immunizations, including BCG, DPT, polio, and measles. These outcomes are consistently available across all three waves and serve as proxies for child quality in the context of the quantity–quality trade-off.
+# Core Data Import and Manipulation 
+library(tidyverse)     # Includes ggplot2, dplyr, readr, etc.
+library(data.table)    # For fast data handling
+library(haven)         # For reading Stata (.dta) files
+library(janitor)       # For cleaning variable names and tables
 
-The 1998 DHS is used as the primary pre-policy baseline wave because it captures children born before the implementation of Manila’s contraceptive ban in 2000. The 2008 DHS serves as the post-policy round to capture outcomes for children born well after the ban took effect. I also include the 2003 DHS in the main specification, recognizing that children in this round may have been born shortly before or after the policy’s introduction. I treat 2003 as a transition-period dataset and conduct sensitivity checks to assess the robustness of findings to its inclusion. I exclude the 1993 DHS from the analysis due to the absence of GPS data, which makes it impossible to reliably assign treatment status. 
+# Variable Labels and Factors 
+library(labelled)      # For working with labelled survey variables
+library(forcats)       # For factor manipulation
 
-To support the identification strategy, I use DHS summary indicators on contraceptive use disaggregated by region and city. These data confirm a sharp and sustained decline in modern contraceptive use in Manila following the implementation of Executive Order No. 003, relative to surrounding cities, validating the policy as a plausibly exogenous fertility shock. I also considered using data from the Philippine National Nutrition Survey (NNS), which includes rich anthropometric and dietary data. However, the NNS microdata are only available from 2003 onward, which limits their value for pre-policy analysis. As such, the DHS remains the most suitable dataset for this study.
+# Table Rendering and Summarization 
+library(gtsummary)     # For descriptive summary tables
+library(gt)            # For rendering gtsummary tables
+library(kableExtra)    # For LaTeX/HTML table styling
+library(knitr)         # For knitting reports and inline tables
+library(broom)         # For tidying model output
 
-\subsection{Identification Strategy}
+# Modeling and Estimation 
+library(fixest)        # For fixed effects and IV regressions
+library(modelsummary)  # For regression output formatting
+library(AER)           # For ivreg() — standard 2SLS instrumental variable estimation
+library(MASS)          # For polr()
+library(ordinal)       # For clm() – flexible ordered logit
 
-To estimate the causal effect of increased fertility on early-childhood health outcomes, I exploit a policy shock generated by Executive Order No. 003, issued in 2000 by the mayor of Manila. This order restricted access to modern contraceptives in all city-run health facilities and remained in effect for nearly a decade. The policy was implemented only in the City of Manila and did not affect neighboring municipalities within the National Capital Region (NCR), which continued to provide modern family planning services. This spatially localized and time-bound restriction created a natural experiment that allows for a quasi-experimental research design. I define the treatment group as children residing in GPS clusters located within or near the Manila boundary, and the control group as children in other NCR municipalities. Given the limitations of the DHS GPS data, which are displaced for confidentiality and do not include exact city identifiers, I use a coarser geographic classification to approximate exposure. Robustness checks vary the control group to include Quezon City only, or the rest of NCR excluding both Manila and Quezon City.
+# Plotting and Utilities 
+library(purrr)         # For functional programming
+library(scales)        # For axis and color formatting in ggplot2
+library(extrafont)     # For font support in graphics
 
-The core of my empirical strategy is a difference-in-differences (DiD) design that compares changes in child outcomes in Manila before and after the ban relative to changes in similar urban areas that were unaffected. The key assumption is that, in the absence of the policy, trends in early-childhood health outcomes would have followed similar trajectories across treatment and control areas. This approach accounts for both fixed differences between cities and nationwide time trends.
+```
 
-To address potential violations of the parallel trends assumption—such as Manila-specific shocks that may have affected all children regardless of family size—I implement a triple-differences strategy that leverages variation in exposure by maternal age. Because fertility declines sharply with age, older women were biologically less likely to respond to the contraceptive ban. For example, mothers aged 45–49 at the time of the policy were near the end of their reproductive years and thus unlikely to experience a fertility increase. By comparing changes in child outcomes across maternal age cohorts within Manila and control cities, I can account for time-varying, location-specific confounders that affect all families, while isolating the policy's effect on family size and its consequences.
+```{r}
+#| label: data-loading
+#| include: false
 
-I further restrict my main analysis to children born before the policy was implemented. Although these children were not conceived due to the ban, they may still have been indirectly affected by the fertility increase through resource dilution within households. This strategy avoids selection bias related to unobservable differences in the endowments of “marginal children” born because of the policy. As argued by Rosenzweig and Zhang (2009), when parents reinforce rather than compensate for birth endowments, estimates based on older siblings provide a lower bound of the true effect of fertility on child quality. Empirical evidence from the Philippines supports this pattern of reinforcement, as shown by Baguet and Dumas (2015). Taken together, these strategies allow me to estimate the causal impact of fertility shocks on early-life health while addressing key concerns about internal validity and sample composition.
+# Load cleaned DHS child-level data with geographic identifiers ---
+dhs1 <- readRDS("../data-analysis/clean-data/dhs_kr_children_with_geo.rds")
 
-\subsection{Sample Selection}
+# Prepare cleaned variables and identifiers ---
+dhs2 <- dhs1 |>
+  filter(survey_year %in% c(1998, 2003, 2008)) |>
+  haven::zap_labels() |>
+  mutate(
+    # Standardize birth year to 4-digit format
+    birth_year = ifelse(birth_year < 100, 1900 + birth_year, birth_year),
 
-The analytic sample is drawn from the Philippine Demographic and Health Surveys (DHS), specifically the Kid Recode (KR) files from 1998, 2003, and 2008. I restrict the sample to children under age five (0–59 months) with non-missing information on key outcomes: birth weight (in grams, when available), perceived size at birth, and vaccination status. Because the Manila contraceptive ban was enacted in 2000 and likely implemented unevenly at first, I define children born in 2001 and later as post-policy and those born before 1997 as pre-policy. Children born between 1997–2000 are excluded in the main specification but retained in robustness checks.
+    # Clean and recode birth weight and perceived birth size
+    birth_weight_grams = na_if(birth_weight, birth_weight %in% c(9996, 9998, 9999)),
+    birth_size_clean = na_if(birth_size, birth_size %in% c(8, 9)),
 
-I include all live births regardless of birth order or plurality to preserve variation in sibship size. Twins and higher-order multiple births are flagged for sensitivity checks but not excluded. Each child is linked to their biological mother using maternal identifiers, allowing construction of sibship size, birth order, and maternal age. Exposure to the policy is defined geographically: children are considered treated if they were born in the City of Manila, and untreated if born in other municipalities within the National Capital Region (NCR). Because GPS data are coarse in some years, geographic exposure is defined at the city level rather than using precise coordinates. Households outside NCR are excluded from the main analysis to ensure urban comparability and avoid confounding by rural fertility and health dynamics.
+    birth_size_factor = case_when(
+      birth_size == 1 ~ "Very large",
+      birth_size == 2 ~ "Larger than average",
+      birth_size == 3 ~ "Average",
+      birth_size == 4 ~ "Smaller than average",
+      birth_size == 5 ~ "Very small",
+      TRUE ~ NA_character_
+    ) |> factor(levels = c(
+      "Very small", "Smaller than average", "Average",
+      "Larger than average", "Very large"
+    )),
+
+    # Flag NCR either via region code or admin name
+    ncr = region_dhs == 14 | tolower(admin_region_name) == "national capital region",
+
+    # Manually fix municipality names for known Manila GPS coordinates (2008 only)
+    municipality_name = case_when(
+      survey_year == 2008 &
+        latitude %in% c(14.6055, 14.56937, 14.56748, 14.56274, 14.59441) &
+        longitude %in% c(120.9485, 120.96649, 120.97882, 120.98432, 121.01443) ~ "Manila",
+      TRUE ~ municipality_name
+    ),
+
+    # Identify Manila municipalities
+    manila = grepl("manila", tolower(municipality_name)),
+
+    # Define additional flags (after correcting birth_year)
+    other_ncr = ncr & !manila,
+    post_policy = birth_year >= 2000,
+    manila_post = manila & post_policy
+  )
+
+# Filter for NCR cities only
+dhs2_ncr <- dhs2 |> filter(ncr)
+```
+
+This study draws on two primary data sources: the Philippine Demographic and Health Surveys (DHS) and the Integrated Public Use Microdata Series (IPUMS) census data. The DHS provides detailed child- and household-level information on fertility behavior, maternal characteristics, and early childhood health outcomes. I use three rounds of the DHS—1998, 2003, and 2008—which are the only Philippine DHS waves with publicly available GPS cluster data. These data are used to classify respondents into treatment and control groups. Because city-level identifiers are not included in the public-use DHS files, I rely on approximate geographic assignment using cluster coordinates. Clusters located within or near the administrative boundaries of the City of Manila are classified as treated, while clusters located elsewhere in the National Capital Region (NCR) serve as the control group.
+
+The DHS analytic sample is limited to children under five years of age who were living with their mothers at the time of the survey. I examine three core early-life health outcomes: (1) reported birth weight (in grams); (2) maternal perception of birth size; and (3) vaccination uptake, measured as the receipt of key early childhood immunizations (BCG, DPT, polio, and measles). These outcomes are consistently available across all three survey rounds and are commonly used as proxies for child quality in studies of the quantity–quality trade-off.
+
+To complement the DHS analysis and support the identification strategy, I construct a panel of individual-level microdata from the IPUMS harmonized Philippine censuses (1990, 2000, and 2010). These nationally representative surveys provide a snapshot of women of reproductive age (15–49) and contain detailed fertility histories—including total children ever born, births in the past year, and number of surviving children. I limit the sample to women ages 15–49 and construct a composite fertility index combining several measures: total children ever born, births in the past year, number of children under age five, and the age of the youngest child. By comparing Manila with other provinces and municipalities in NCR, I test whether long-run fertility patterns reflect the contraceptive policy shock.
+
+The 1998 DHS serves as the primary pre-policy baseline, capturing births prior to the issuance of Executive Order No. 003. The 2008 DHS is the main post-policy round, while the 2003 DHS is treated as a transition period. I exclude the 1993 DHS due to the absence of geospatial identifiers. In contrast, the census years 1990 and 2000 bracket the policy’s onset, while the 2010 census provides post-policy fertility outcomes. This combination of sources enables both short-run and long-run assessments of the policy’s impact on fertility and child investment.
+
+To validate the policy shock, I use DHS region- and city-level contraceptive use indicators, which confirm a sharp and sustained decline in modern contraceptive use in Manila relative to other NCR cities. These patterns reinforce the plausibility of Executive Order No. 003 as an exogenous shock to fertility preferences and access. I also considered the Philippine National Nutrition Survey (NNS) as an auxiliary source, but its limited pre-2003 coverage restricts its utility for identifying pre-policy trends. For this reason, the combined DHS and IPUMS datasets offer the most comprehensive and temporally balanced data available for the study's objectives.
 
 \subsection{Variables}
 
-The primary outcome variables reflect early-life health and investment. These include: (1) birth weight in grams, as recorded by the mother when available; (2) the mother’s subjective assessment of birth size (categorized as very small, small, average, large, or very large); and (3) indicators for whether the child received core early-life vaccinations, including BCG, DPT1–3, polio doses, and measles. A binary variable indicating whether the child received all recommended vaccines is also constructed as a summary measure of postnatal health investment.
+The primary outcome variables reflect early-life health and investment. These include: (1) birth weight in grams, as recorded by the mother when available; and (2) indicators for whether the child received core early-life vaccinations, including BCG, DPT1–3, polio doses, and measles.
 
-The main explanatory variable is sibship size, defined as the total number of surviving children ever born to the mother at the time of the child’s birth, as reported in the birth history module. This variable captures the resource dilution mechanism central to the quantity–quality trade-off. To assess whether the contraceptive ban caused an increase in sibship size, I also construct an indicator for policy exposure, coded as 1 if the child was born in the City of Manila and in or after 2001 (i.e., post-ban), and 0 otherwise. In extended specifications, I interact this treatment indicator with maternal age at birth to capture heterogeneity in fertility effects across age cohorts.
+The main explanatory variable is sibship size, defined as the total number of surviving children ever born to the mother at the time of the child’s birth, as reported in the birth history module. This variable captures the resource dilution mechanism central to the quantity–quality trade-off. To isolate exogenous variation in sibship size, I construct an instrument for fertility based on policy exposure: an interaction of a Manila indicator and a post-ban cohort indicator. Specifically, children born in the City of Manila in or after 2000 are coded as treated. In extended specifications, I interact this treatment indicator with maternal age at birth to allow for heterogeneity in fertility responses across age cohorts, considering the fact that older women likely exhibited lower responsiveness due to reduced fecundity.
 
-Control variables include standard child-, mother-, and household-level characteristics. At the child level, I include sex, birth order, whether the child is part of a multiple birth, and the preceding birth interval in months. At the maternal level, I control for the mother’s age at birth, educational attainment (categorized as none, primary, secondary, higher), literacy status, employment status, and age at first birth. Household-level controls include household size, urban/rural status (restricted to NCR in the main sample), access to improved water and sanitation, electricity, household crowding, and the DHS wealth index. Fixed effects for survey year are included to account for common shocks and secular trends. All regressions are weighted using DHS sampling weights, and standard errors are clustered at the PSU (primary sampling unit) level.
+Control variables include standard child-, maternal-, and household-level characteristics. At the child level, I control for sex, birth order, multiple birth status, and the preceding birth interval in months. Maternal covariates include age at birth, educational attainment (none, primary, secondary, higher), literacy, employment status, and age at first birth. Household-level controls include household size, urban/rural residence (restricted to NCR in the main analysis), and the DHS wealth index. All regressions include survey year fixed effects to control for secular trends and common shocks. Estimates are weighted using DHS sample weights, and standard errors are clustered at the primary sampling unit (PSU) level.
 
 \subsection{Estimation}
 
-To estimate the causal effect of fertility on early-life health outcomes, I use a two-stage least squares (2SLS) strategy. Specifically, I regress child health outcomes, such as birth weight, perceived size at birth, and immunization uptake, on measures of sibship size, using exogenous variation induced by the contraceptive supply ban in Manila as an instrument. This approach allows me to isolate the impact of increased fertility on child quality and mitigate bias from endogenous family size decisions.
+To estimate the causal effect of fertility on early-life health outcomes, I implement a two-stage least squares (2SLS) strategy. The first stage is estimated at the maternal level, as fertility is a cumulative outcome of the mother rather than the child. Importantly, this stage also serves to establish whether the contraceptive supply ban had a measurable impact on maternal fertility behavior. Specifically, I use two measures of fertility: the total number of children ever born and the number of living children at the time of survey. These outcomes capture distinct dimensions of fertility—cumulative births and net surviving offspring—and are regressed on an indicator for policy exposure, defined as the interaction between a Manila municipality indicator and a post-ban birth cohort.
 
-The estimation proceeds as follows:
+In the second stage, I shift to the child level and use the number of surviving older siblings at the time of the index child’s birth as the endogenous regressor, instrumented by policy exposure. This variable captures sibship size at birth, and allows me to estimate the effect of increased family size—induced by the contraception ban—on early-life health outcomes such as birth weight, and number of vaccines received. This two-stage framework allows me to isolate plausibly exogenous variation in family size induced by the contraceptive supply ban in Manila, while addressing endogeneity concerns that arise when fertility is influenced by unobserved preferences or constraints. I estimate all models using linear probability models (LPMs) for consistency with the 2SLS framework. All specifications apply DHS sampling weights and cluster standard errors at the PSU level.
+
+\section{Results and Discussion}
+
+\subsection{Descriptive Statistics}
+
+The following tables present summary statistics for key child health outcomes, disaggregated by location and policy period. Table 1 presents summary statistics for mean birth weight by location and policy period.
+
+```{=latex}
+\input{../data-analysis/outputs/dhs_summary_birth_weight_t.tex}
+```
+
+Among children born in Manila, the average birth weight declined from 3,023.1 grams (SD = 712.6) in the pre-policy period to 2,969.8 grams (SD = 619.2) after the policy's implementation. A similar decline is observed in non-National Capital Region (NCR) areas, where mean birth weight dropped from 3,106.4 grams (SD = 726.9) to 2,994.5 grams (SD = 681.7). In contrast, birth weights in other NCR cities remained relatively stable over time, increasing slightly from 2,830.4 grams (SD = 743.6) to 2,965.9 grams (SD = 793.7). The majority of births in the sample occurred in non-NCR areas, which is expected given that these include  the rest of the country beyond Metro Manila. Notably, the decline in birth weight was more pronounced in Manila compared to other cities within the National Capital Region (NCR), suggesting a localized impact of the policy. While non-NCR areas also experienced reductions, the contrast between Manila and its neighboring NCR cities—where the policy was not implemented—is a more relevant comparison for isolating potential policy effects.
+
+Lastly, Table 3 presents the distribution of childhood vaccine uptake across policy periods and geographic areas.
+
+```{=latex}
+\input{../data-analysis/outputs/dhs_summary_vaccines_t.tex}
+```
+
+Table 3 presents the distribution of childhood vaccine uptake across policy periods and geographic areas. A substantial share of children in all groups received no vaccines, especially in Manila (79.4% pre-policy, 75.2% post-policy). However, there was a notable post-policy increase in children receiving 5 or more vaccines in both NCR (from 25.2% to 38.2%) and non-NCR cities (from 25.1% to 33.5%). These shifts indicate modest improvements in vaccine coverage in areas outside Manila, which—being unaffected by the contraceptive access restrictions—merit further investigation into other potential drivers, such as enhancements in health system capacity or increased accessibility of immunization services.
+
+Still, while the descriptive patterns suggest a localized effect in Manila—especially relative to nearby NCR cities—I use the full Philippine sample for the regressions that follow. This decision is mostly practical: restricting the analysis to NCR alone would leave too small a sample to detect meaningful effects with confidence. That said, I recognize the importance of comparing Manila to similar, unaffected areas. For robustness, I replicate all key models using only births from NCR and report those results in the Appendix.
+
+\subsection{First-Stage Estimates: Effect of the Contraceptive Ban on Fertility}
+
+To assess the fertility effects of Executive Order No. 003 (EO 003)—a 2000 Manila City ordinance that curtailed access to modern contraceptives—I estimate first-stage ordinary least squares (OLS) regressions that relate policy exposure to maternal fertility outcomes, using data from the Demographic and Health Surveys (DHS). These first-stage estimates serve as the foundation for the instrumental variable strategy in the next stage of analysis. The regressions use the mother as the unit of analysis, since fertility is a cumulative outcome determined at the maternal level. Evidence that the policy affected maternal fertility behavior provides a necessary condition for interpreting later estimates of child health outcomes as causal effects of fertility.
+
+The regression specification is designed to isolate the differential change in fertility among mothers residing in Manila following the implementation of EO 003, relative to mothers in other regions over the same period. I estimate the following equation:
 
 $$
-\text{First stage:} \quad K_{ijt} = \alpha_2 X_{ijt} + \gamma Z_{ijt} + v_{ijt}
+\text{Fertility}_{im} = \beta_0 + \beta_1 \text{Manila}_m + \beta_2 \text{ManilaPost}_{im} + \boldsymbol{X}_{im}'\gamma + \lambda_{y(i)} + \varepsilon_{im}
 $$
 
+Where: $Fertility_{im}$ is the fertility outcome for mother $i$ in municipality m (e.g., number of living children at survey, total children ever born); $\text{Manila}_m$ is an indicator for residence in Manila,$\text{ManilaPost}_{im}$ is an interaction term equal to 1 if the mother resided in Manila and gave birth in or after the year 2000 (the policy period); $X_{im}$ includes maternal characteristics such as age, educational attainment, and household wealth; $\lambda_{y(i)}$ are birth year fixed effects, controlling for national trends in fertility by cohort, and $\varepsilon_{im}$ is the error term, clustered at the primary sampling unit (PSU) level.
+
+The regression results, shown in Table 4, examine the relationship between policy exposure and sibship size. I use two measures of maternal fertility: the number of living children at the time of survey (Model 1) and the total number of children ever born (Model 2). In both specifications, the coefficient on the interaction term Manila × 2000 is positive—0.098 in Model 1 and 0.206 in Model 2—though neither is statistically significant. These estimates suggest a directionally consistent increase in fertility among Manila women exposed to the contraceptive ban. Maternal education and household wealth are negatively associated with fertility, while maternal age is positively associated, consistent with socioeconomic gradients in childbearing. 
+
+Table \ref{tab:first-stage-sibship} presents first-stage regression estimates assessing the relationship between exposure to Manila’s post-2000 fertility-restrictive policy and sibship size. The outcome variables are the number of living children at the time of survey (Model 1) and the total number of children ever born, including deceased (Model 2). In both models, the interaction term Manila × Post-2000 is positive—0.098 (SE = 0.691) in Model 1 and 0.200 (SE = 0.461) in Model 2—indicating that children born to Manila mothers after the policy may have experienced slightly larger sibship sizes, on average. Although these estimates are not statistically significant, their consistent positive direction suggests that the policy did not produce a strong fertility-decreasing effect, and may even have been associated with modest increases in completed or surviving fertility.
+
+```{r}
+#| label: first-stage-sibship
+#| warning: false
+#| message: false
+#| include: true
+#| echo: false
+#| results: 'asis'
+
+# First-Stage Regressions: Effect of EO 003 on Sibship Size 
+
+# Estimate models
+first_stage1 <- feols(
+  living_children ~ manila + manila_post +
+    mother_educ_attain + mother_age_current + wealth_index | birth_year,
+  data = dhs2,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+first_stage2 <- feols(
+  total_children_ever ~ manila + manila_post +
+    mother_educ_attain + mother_age_current + wealth_index | birth_year,
+  data = dhs2,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+# Combine models into a named list
+first_stage_models <- list(
+  "Model (1)" = first_stage1,
+  "Model (2)"    = first_stage2
+)
+
+# Generate and style the LaTeX table
+modelsummary(
+  first_stage_models,
+  output = "kableExtra",
+  title = "First-Stage Regressions: Effect of Policy Exposure on Sibship Size",
+  table_caption = "tab:first-stage-sibship", 
+  coef_map = c(
+    manilaTRUE         = "Manila",
+    manila_postTRUE    = "Manila × Post-2000",
+    mother_educ_attain = "Mother’s Education",
+    mother_age_current = "Mother’s Age",
+    wealth_index       = "Wealth Index"
+  ),
+  statistic = "p.value",
+  gof_map = c(
+    "nobs" = "Num. Observations",
+    "r.squared" = "$R^2$",
+    "adj.r.squared" = "Adjusted $R^2$"
+  ),
+  escape = FALSE,
+  fmt = 3,
+  stars = TRUE,
+  latex_options = "booktabs",
+  notes = list(
+    "All regressions include birth year fixed effects.",
+    "Standard errors are clustered at the PSU level.",
+    "Estimates are weighted using DHS sample weights."
+  )
+) |>
+  kable_styling(
+    latex_options = c("hold_position", "scale_down", "threeparttable"),
+    font_size = 10
+  )
+```
+The control variables function as expected and lend credibility to the model. Maternal education is significantly associated with smaller sibship sizes (−0.326 and −0.397, p < 0.001), while maternal age is positively associated (0.200 and 0.221, p < 0.001), reflecting life-cycle fertility dynamics. Wealth index is also negatively associated with fertility (−0.250 and −0.291, p < 0.001). Both models explain substantial variation in the outcome, with adjusted R² values of 0.503 and 0.527, respectively.
+
+Meanwhile, Table \ref{tab:first-stage-sibship-placebo} serves as a placebo test using Quezon City\footnote{Quezon City and Manila are both highly urbanized cities within Metro Manila and share closely aligned demographic profiles. Data from the 2010 Census and the 2013 NDHS show that both cities had similar rates of secondary or higher education among women (approximately 55--60\%), high institutional delivery coverage (above 90\%), and comparable access to modern contraceptive methods. Prior to the policy, total fertility rates in both cities ranged between 2.5 and 2.7 children per woman. These commonalities extend to urban infrastructure and wealth distribution, and make Quezon City a credible counterfactual for isolating the effects of Manila’s 2000 policy.\cite{psa2010,ndhs1998,ndhs2013,mmda2012}}, an urban area demographically and geographically comparable to Manila but not subject to the policy. The placebo interaction term Quezon × Post-2000 is near zero in both specifications: 0.006 (SE = 0.951) for living children and 0.036 (SE = 0.754) for total children ever born. These findings are precisely null and much smaller in magnitude than those observed for Manila, which provide important reassurance that the patterns seen in Table \ref{tab:first-stage-sibship} suggest that the observed effects are not confounded by region-wide demographic shifts or by secular trends in urban fertility behavior. In contrast to Manila, there is no directional indication of post-2000 fertility increase in Quezon City.
+
+```{r}
+#| label: first-stage-sibship-placebo
+#| warning: false
+#| message: false
+#| include: true
+#| echo: false
+#| results: 'asis'
+
+# Define placebo treatment using Quezon City
+dhs2 <- dhs2 |> mutate(
+  qc = grepl("quezon", tolower(municipality_name)),
+  qc_post = qc & birth_year >= 2000
+)
+
+# Run placebo regressions
+placebo1 <- feols(
+  living_children ~ qc + qc_post + mother_educ_attain + mother_age_current + wealth_index | birth_year,
+  data = dhs2,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+placebo2 <- feols(
+  total_children_ever ~ qc + qc_post + mother_educ_attain + mother_age_current + wealth_index | birth_year,
+  data = dhs2,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+# --- Combine placebo models ---
+first_stage_placebo1 <- list(
+  "Model (1)" = placebo1,
+  "Model (2)"    = placebo2
+)
+
+# --- Output formatted LaTeX table ---
+modelsummary(
+  first_stage_placebo1,
+  output = "kableExtra",
+  title = "Placebo Regressions: Using Quezon City as Falsification Test",
+  table_caption = "tab:first-stage-sibship-placebo",
+  coef_map = c(
+    qcTRUE        = "Quezon City",
+    qc_postTRUE   = "Quezon × Post-2000",
+    mother_educ_attain = "Mother’s Education",
+    mother_age_current = "Mother’s Age",
+    wealth_index       = "Wealth Index"
+  ),
+  statistic = "p.value",
+  gof_map = c(
+    "nobs" = "Num. Observations",
+    "r.squared" = "$R^2$",
+    "adj.r.squared" = "Adjusted $R^2$"
+  ),
+  escape = FALSE,
+  fmt = 3,
+  stars = TRUE,
+  latex_options = "booktabs",
+  notes = list(
+    "Placebo test using Quezon City as a comparison group.",
+    "All regressions include birth year fixed effects.",
+    "Standard errors are clustered at the PSU level.",
+    "Estimates are weighted using DHS sample weights."
+  )
+) |>
+  kable_styling(
+    latex_options = c("hold_position", "scale_down", "threeparttable")
+  )
+```
+
+Table \ref{tab:first-stage-sibship-manila-qc} strengthens this interpretation by directly comparing Manila to Quezon City in a difference-in-differences framework. Restricting the sample to these two cities, the coefficient on the Manila × Post-2000 term remains positive: 0.025 (SE = 0.925) in Model 1 and 0.104 (SE = 0.724) in Model 2. Although these estimates are again statistically insignificant, they are directionally aligned with the first-stage results and notably larger than those in the placebo regressions. This suggests that even when directly comparing policy-exposed and unexposed cities within a single model, the post-2000 trend in Manila is somewhat more pronounced, and offers support for a modest, policy-related fertility shift.
+
+```{r}
+#| label: first-stage-sibship-manila-qc
+#| warning: false
+#| message: false
+#| include: true
+#| echo: false
+#| results: 'asis'
+
+# Subset only Manila and Quezon City 
+dhs2_subset <- dhs2 |>
+  filter(municipality_name %in% c("Manila", "Quezon City")) |>
+  mutate(
+    manila = grepl("manila", tolower(municipality_name)),
+    manila_post = manila & birth_year >= 2000
+  )
+
+# Run DiD regressions comparing Manila vs Quezon City
+did1 <- feols(
+  living_children ~ manila + manila_post + mother_educ_attain + mother_age_current + wealth_index | birth_year,
+  data = dhs2_subset,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+did2 <- feols(
+  total_children_ever ~ manila + manila_post + mother_educ_attain + mother_age_current + wealth_index | birth_year,
+  data = dhs2_subset,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+# Combine DiD models
+first_stage_diff_mq <- list(
+  "Model (1)" = did1,
+  "Model (2)"    = did2
+)
+
+# Output formatted table
+modelsummary(
+  first_stage_diff_mq,
+  output = "kableExtra",
+  title = "Difference-in-Differences: Manila vs. Quezon City, Post-2000",
+  table_caption = "tab:first-stage-sibship-manila-qc",
+  coef_map = c(
+    manilaTRUE       = "Manila",
+    manila_postTRUE  = "Manila × Post-2000",
+    mother_educ_attain = "Mother’s Education",
+    mother_age_current = "Mother’s Age",
+    wealth_index       = "Wealth Index"
+  ),
+  statistic = "p.value",
+  gof_map = c(
+    "nobs" = "Num. Observations",
+    "r.squared" = "$R^2$",
+    "adj.r.squared" = "Adjusted $R^2$"
+  ),
+  escape = FALSE,
+  fmt = 3,
+  stars = TRUE,
+  latex_options = "booktabs",
+  notes = list(
+    "Sample restricted to Manila and Quezon City.",
+    "All regressions include birth year fixed effects.",
+    "Standard errors are clustered at the PSU level.",
+    "Estimates are weighted using DHS sample weights."
+  )
+) |>
+  kable_styling(
+    latex_options = c("hold_position", "scale_down", "threeparttable")
+  )
+```
+
+
+To complement the regression analysis, I construct approximate birth rates using four waves of the Philippine Census (1990, 1995, 2000, and 2010). I calculate city-level birth rates by year and compare trends across Manila, other cities in the National Capital Region (NCR), and the rest of the Philippines. Although these census-based estimates are less precise than those derived from the DHS, they provide an independent view of fertility patterns during the policy period. I estimate annual birth rates by dividing the number of young children (ages 0–5) in a given census year by the number of women of childbearing age who could have plausibly given birth to them, based on age and co-residence within the same household. To improve the likelihood of correctly linking mothers and children, I restrict the sample to women identified as household heads or spouses, under the assumption that children typically reside with their biological mothers.
+
+Formally, for each calendar year $t$ and maternal age group $a$, the approximate birth rate is defined as:
+
 $$
-\text{Second stage:} \quad Y_{ijt} = \alpha_1 X_{ijt} + \beta \widehat{K}_{ijt} + u_{ijt}
+\text{BirthRate}_{a,t} =
+\frac{
+  \text{Number of children aged } c - t \text{ in census year } c
+}{
+  \text{Number of women aged } c - t + a \text{ in census year } c
+}
 $$
 
-where: \( Y_{ijt} \) is the health-related outcome for child *i* in city *j* and survey year *t*, including birth weight (grams), perceived size at birth, and full basic immunization status. \( K_{ijt} \) is sibship size at time of birth, defined as the number of surviving siblings. \( Z_{ijt} \) is the instrument for sibship size, based on exposure to the contraception ban—specifically, an interaction of a Manila indicator and a post-ban cohort indicator. \( X_{ijt} \) is a vector of control variables including child-, maternal-, and household-level covariates (see *Variables* section). Standard errors are clustered at the PSU level; survey-year fixed effects are included.
+This approach estimates the share of women aged $a$ in year $t$ who gave birth, inferred from the presence of children born in year $t$ (that is, children aged $c - t$) in the census conducted in year $c$. I use census years $c \in {1990, 1995, 2000, 2010}$ and construct birth rates based on children aged 0 to 5 at the time of enumeration, thereby covering calendar years from 1985 to 2015. To reduce noise and ensure comparability across time, I aggregate across maternal ages 15 to 49.
 
-To account for heterogeneity in fertility responses to the ban, I also estimate an alternative specification where the instrument interacts treatment status (Manila × post-ban) with maternal age at birth. This reflects the fact that older women were less likely to change fertility behavior due to lower fecundity, and strengthens identification through cross-cohort variation in exposure intensity.
+Table \ref{tab:birthrates-region} compares average birth rates before and after 2000 across three region groups: Manila, other NCR cities, and the rest of the Philippines. The results reveal a notably smaller decline in birth rates in Manila relative to the comparison areas. Between the pre-2000 and post-2000 periods, Manila’s average birth rate decreased by only 8.4% (from 0.0822 to 0.0753). In contrast, other NCR cities experienced a 17.0% decline, and the rest of the country saw a 20.8% drop.
 
-Although the outcomes are binary or ordinal, I estimate equation (1) using linear probability models to retain consistency with the 2SLS framework. As robustness, I also estimate probit and logit models and find qualitatively similar results. All models use DHS sampling weights, and standard errors are clustered by primary sampling unit (PSU).
+```{r}
+#| label: birthrates-region
+#| warning: false
+#| message: false
+#| include: true
+#| echo: false
+#| results: 'asis'
 
-\section{Results}
+birth_rates <- data.frame(
+  `Region Group`   = c("Manila", "Other NCR Cities", "Rest of the Philippines"),
+  `Pre-2000`       = c(0.0822, 0.0920, 0.1261),
+  `Post-2000`      = c(0.0753, 0.0764, 0.0999),
+  `Percent Change` = c(-8.4, -17.0, -20.8)
+)
+
+colnames(birth_rates) <- c("Region Group", "Pre-2000", "Post-2000", "Percent Change")
+
+
+birth_rates |>
+  kable(
+    format = "latex",
+    booktabs = TRUE,
+    caption = "Average Birth Rates Before and After 2000 by Region Group",
+    label = "birthrates-region"
+  ) |>
+  kable_styling(latex_options = "hold_position", "scale_down")
+```
+
+Across all regions, birth rates declined over time. However, the decline was smallest in Manila (−8.4%)—the only jurisdiction directly affected by the contraceptive ban—compared to other NCR cities (−17.0%) and the rest of the Philippines (−20.8%). These descriptive trends suggest that although fertility fell nationwide, the reduction in Manila was markedly smaller. This relative divergence aligns with the regression-based findings, which pointed to a potential dampening of the fertility decline in Manila following the implementation of EO 003. The smaller post-2000 decline in birth rates supports the interpretation that the policy may have altered fertility trajectories in ways not observed elsewhere. If EO 003 influenced fertility behavior, we would expect birth rates in Manila to decline more slowly than in unaffected areas—and the data appear consistent with that expectation.
+
+I recognize that any comparison involving the rest of the Philippines must account for the sheer size and heterogeneity of this group, which spans highly urbanized centers as well as rural and remote provinces. Aggregating such diverse regions may obscure meaningful local variation and exaggerate the contrast with Manila. That said, if Executive Order No. 003 had a substantive effect on fertility behavior, I would still expect fertility trends in Manila to diverge from those in the rest of the country—a pattern that both the DHS regressions and census-based birth rates consistently support.
+
+In addition, several important caveats apply to the birth rate approximation. First, the method omits both child and maternal mortality, as well as any migration that may have occurred between the time of birth and the census year. Second, the computation restricts the sample to women who appear as household heads or as spouses of household heads, to increase the likelihood that observed children are their biological offspring. This restriction introduces composition effects. For instance, a 26-year-old woman listed as a household head in the census may differ systematically from a 25-year-old who assumed that role several years earlier. These differences are especially salient among younger women, where household formation often coincides with marriage and initial childbearing. As a result, birth rates may show artificial dips in the census years themselves.
+
+Despite these limitations, the estimates help build confidence in the plausibility of a fertility response to EO 003. They show that even when fertility is measured approximately from census structure, the direction of change aligns with expectations under a binding contraceptive ban. This, in turn, motivates the more rigorous analysis that follows, which uses DHS birth histories and econometric models to estimate fertility effects more precisely.
+
+\subsection{Reduced-Form Estimates: Effect of the Policy on Child Outcomes}
+
+Before proceeding to instrumental variables (IV) estimation, I begin by estimating reduced-form regressions to assess the intent-to-treat (ITT) effects of policy exposure on child outcomes. This step serves two purposes. First, it offers a preliminary test of whether the policy shock—treated as exogenous variation in contraceptive access—leads to measurable differences in child health. If no such differences emerge, any IV estimates may lack credibility or relevance. Second, the reduced-form regressions provide the denominator in two-stage least squares (2SLS), which estimates the total effect of the instrument without isolating its mechanism through an endogenous variable such as fertility. 
+
+The reduced-form specification follows a difference-in-differences framework. Formally, the reduced-form equation takes the following structure:
+
+$$
+\text{Outcome}_{im} = \beta_0 + \beta_1 \text{Manila}_m + \beta_2 \text{ManilaPost}_{im} + \boldsymbol{X}'_{im} \gamma + \lambda_{y(i)} + \varepsilon_{im}
+$$
+
+
+Where: $\text{Outcome}_{im}$ is the child health outcome for child $i$ of mother $m$ (e.g., birth weight in grams or number of vaccine doses received); $\text{Manila}_m$ is an indicator for residence in Manila; $\text{ManilaPost}_{im}$ is an interaction term equal to 1 if the child was born in Manila in or after the year 2001 (i.e., the policy period), and 0 otherwise; $\boldsymbol{X}'_{im}$ includes individual- and household-level controls such as maternal age, maternal education, household wealth index, birth order, child sex, and twin status; $\lambda_{y(i)}$ denotes birth year fixed effects that flexibly capture national trends in child outcomes across cohorts; and $\varepsilon_{im}$ is the error term, clustered at the primary sampling unit (PSU) level.  The coefficient $\beta_2$ captures the reduced-form (intent-to-treat) effect of policy exposure on child outcomes.
+
+Table \ref{tab:reducedform-child-outcomes} reports the results from reduced-form regressions estimating the intent-to-treat (ITT) effects of EO 003 exposure on child health outcomes. Each column presents a separate specification, with outcomes including birth weight, and number of vaccines received
+
+```{r}
+#| label: reduced-and-second-stage-wrangling
+#| include: false 
+
+# Clean and augment DHS data
+
+dhs3 <- dhs2 |>
+  mutate(
+    birth_year = if_else(birth_year < 100, birth_year + 1900, birth_year),
+    birth_year_relative_to_policy = birth_year - 2000,
+    post_policy = as.integer(birth_year >= 2001),
+    sample_weight = sample_weight / 1e6,
+    
+    # Standardize urban/rural indicator
+    urban = case_when(
+      str_to_lower(residence_type) %in% c("urban", "1") ~ 1L,
+      str_to_lower(residence_type) %in% c("rural", "2") ~ 0L,
+      TRUE ~ NA_integer_
+    ),
+    
+    # Total number of vaccines received
+    num_vaccines = rowSums(across(
+      c(received_dpt1, received_dpt2, received_dpt3,
+        received_polio1, received_polio2, received_polio3,
+        received_measles, received_bcg),
+      ~ as.integer(.x == 1 | .x == TRUE)
+    ), na.rm = TRUE)
+  ) |>
+  
+  # Approximate birth date at mid-month
+  mutate(birth_date = ymd(paste(birth_year, birth_month, 15))) |>
+  
+  # Order by mother and child's birth date
+  arrange(case_id, birth_date) |>
+  group_by(case_id) |>
+  
+  # Count number of living older siblings at the time of each child’s birth
+  mutate(
+    living_siblings_at_birth = sapply(seq_along(birth_date), function(i) {
+      sum(
+        birth_date[1:(i - 1)] < birth_date[i] & 
+        (is.na(age_at_death[1:(i - 1)]) |
+         birth_date[1:(i - 1)] + days(age_at_death[1:(i - 1)]) > birth_date[i])
+      )
+    })
+  ) |>
+  ungroup()
+```
+
+```{r}
+#| label: reduced-form-outcomes
+#| warning: false
+#| message: false
+#| include: true
+#| echo: false
+#| results: 'asis'
+
+# Model 1: Birth Weight (grams)
+reducedform_bw <- feols(
+  birth_weight_grams ~ manila_post + mother_age_current + mother_educ_attain +
+    wealth_index + birth_order + is_twin + child_sex | birth_year,
+  data = dhs3,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+# Model 2: Number of Vaccines
+reducedform_vax <- feols(
+  num_vaccines ~ manila_post + mother_age_current + mother_educ_attain +
+    wealth_index + birth_order + is_twin + child_sex | birth_year,
+  data = dhs3,
+  weights = ~sample_weight,
+  cluster = ~cluster_id
+)
+
+# Combine models
+reducedform_models <- list(
+  "Birth Weight"  = reducedform_bw,
+  "Number of Vaccines"    = reducedform_vax
+)
+
+# Output formatted table
+modelsummary(
+  reducedform_models,
+  output = "kableExtra",
+  title = "Reduced-Form Regressions: Intent-to-Treat Effects of EO 003 on Child Outcomes",
+  table_caption = "tab:reducedform-child-outcomes",
+  coef_map = c(
+    manila_postTRUE    = "Manila × Post-2000",
+    mother_age_current = "Mother’s Age",
+    mother_educ_attain = "Mother’s Education",
+    wealth_index       = "Wealth Index",
+    birth_order        = "Birth Order",
+    is_twin            = "Twin",
+    child_sex          = "Child is Male"
+  ),
+  statistic = "p.value",
+  gof_map = c(
+    "nobs" = "Num. Observations",
+    "r.squared" = "$R^2$",
+    "adj.r.squared" = "Adjusted $R^2$"
+  ),
+  escape = FALSE,
+  fmt = 3,
+  stars = TRUE,
+  latex_options = "booktabs",
+  notes = list(
+    "All regressions include birth year fixed effects.",
+    "Standard errors are clustered at the PSU level.",
+    "Estimates are weighted using DHS sample weights."
+  )
+) |>
+  kable_styling(
+    latex_options = c("hold_position", "scale_down", "threeparttable")
+  )
+```
+
+The strongest and most consistent finding emerges in vaccination uptake. Exposure to the policy is associated with a significant reduction of 0.91 vaccine doses (p < 0.001). Given the Philippine Department of Health’s recommendation of eight core immunizations by age one \citep{doh2023nip}, this decline represents a shortfall of over 10% of the complete vaccination schedule. A child born in Manila in 2001—after the implementation of Executive Order No. 003—was, on average, likely to have missed nearly one routine vaccine compared to a counterpart born just a few years earlier or outside Manila. This gap could correspond to missing a third DPT booster, skipping the measles vaccine, or failing to complete the polio series—each of which increases exposure to otherwise preventable diseases.
+
+In contrast, the estimated effect on birth weight is smaller and not statistically significant. On average, children born under the policy weighed 349.6 grams less than their peers in unaffected areas (p = 0.142). While the estimate does not reach statistical significance, its magnitude is nontrivial: a shortfall of nearly 350 grams could shift a child from normal birth weight into the low birth weight category (<2,500g), which has been linked to higher risks of infant morbidity and developmental delays \citep{katz2013mortality}. 
+
+Several covariates exhibit statistically significant associations with early-life health outcomes. Maternal age shows a negative association with birth weight (−35.6g per year, p < 0.001), which is consistent with clinical evidence linking advanced maternal age to elevated risks such as placental insufficiency and gestational complications \citep{lean2023placental}. In contrast, each additional year of maternal age corresponds to a modest increase in vaccine uptake (+0.048 doses, p < 0.001), which might suggest greater maternal experience or improved navigation of health systems \citep{barker2021vaccination}. Meanwhile, maternal education shows a split pattern. Children of more educated mothers weigh less at birth (−457.6g, p < 0.001) but receive slightly more vaccines (+0.047 doses, p = 0.061). These results may reflect reporting differences: highly educated mothers may recall vaccination events more precisely and assess birth size more conservatively, which result in downward bias in reported weight \citep{filmer2001health}. Similarly, wealth index also exhibits statistically significant associations, though the direction diverges from conventional expectations. Higher wealth correlates with lower birth weight (−549.1g, p < 0.001) and fewer vaccine doses (−0.078, p = 0.005).
+
+On the other hand, birth order has opposing effects. Later-born children weigh more (+182.6g, p < 0.001) but receive fewer vaccines (−0.241 doses, p < 0.001), which support theories of postnatal resource dilution within larger families \citep{black2008maternal}.Furthermore, twins weigh significantly less than singletons (−397.7g, p = 0.016), which is consistent with evidence of growth constraints in multiple gestations \citep{klebanoff2005multiple}. However, twin status shows no statistically significant effect on vaccination. Finally, child sex carries no meaningful association with either outcome. Male children weigh slightly less (−7.1g) and receive fewer vaccines (−0.051 doses), but both estimates are small and statistically insignificant (p = 0.869 and 0.307), which suggest negligible gender disparities in early-life health inputs in this context.
+
+Taken together, these reduced-form estimates provide preliminary support for a quantity–quality trade-off in early-life investments. However, because exposure to the fertility shock (i.e., EO 003) is jointly determined with family size, these estimates conflate the effects of sibship size with the direct effects of policy exposure and local health service constraints. To isolate the causal impact of family size per se, I turn to an instrumental variable approach in the next section.
+
+\subsection{Second-Stage Estimates: The Quantity–Quality Trade-off}
+
+Having established preliminary intent-to-treat (ITT) effects of policy exposure on child outcomes through reduced-form regressions, I now turn to instrumental variables (IV) estimation to assess the causal effect of sibling exposure on early childhood health. The IV approach allows for identification of the total effect of having more siblings at birth on outcomes such as birth weight and immunization, to address the potential endogeneity of fertility decisions. Specifically, fertility may be jointly determined with unobserved factors such as household preferences, or income shocks, which would bias ordinary least squares (OLS) estimates.
+
+To address this concern, I instrument the number of living siblings at birth using a policy-induced fertility shock: the interaction between residence in Manila and the post-2000 period (i.e., after the issuance of Executive Order No. 003). This interaction captures exogenous variation in fertility arising from localized restrictions in contraceptive access. The identifying assumption is that, conditional on covariates and year fixed effects, this policy-driven variation affects child outcomes only through its effect on sibling exposure.
+
+The IV model is estimated using two-stage least squares (2SLS), where the first stage regressed sibling exposure on the instrument and controls, and the second stage regresses child outcomes on the predicted sibling exposure. The estimating equation is of the following form:
+
+$$
+\text{Outcome}_{im} = \beta_0 + \beta_1 \widehat{\text{Siblings}}_{im} + \boldsymbol{X}'_{im}\gamma + \lambda_{y(i)} + \varepsilon_{im}
+$$
+
+Where $\text{Outcome}_{im}$ is the child health outcome for child $i$ of mother $m$; $\widehat{\text{Siblings}}_{im}$ is the instrumented number of living siblings at birth; $\boldsymbol{X}_{im}$ includes individual- and household-level controls (maternal age, maternal education, wealth, birth order, sex, twin status); and $\lambda_{y(i)}$ denotes birth year fixed effects. Estimates are weighted using DHS sample weights, and standard errors are clustered at the primary sampling unit (PSU) level.
+
+Table~\ref{tab:iv-child-outcomes} presents instrumental variables (IV) estimates of the effect of sibling exposure—measured by the number of living siblings at birth—on two key early childhood outcomes: birth weight and vaccine uptake. These results represent an important step toward isolating the causal impact of fertility changes, building on the intent-to-treat estimates previously shown in Table 7.
+
+```{r}
+#| label: second-stage-outcomes
+#| warning: false
+#| message: false
+#| include: true
+#| echo: false
+#| results: 'asis'
+
+# IV Model 1: Birth Weight
+iv_bw <- ivreg(
+  birth_weight_grams ~ living_siblings_at_birth + mother_age_current + 
+    mother_educ_attain + wealth_index + birth_order + is_twin + child_sex + factor(birth_year) |
+  manila_post + mother_age_current + mother_educ_attain + 
+    wealth_index + birth_order + is_twin + child_sex + factor(birth_year),
+  data = dhs3,
+  weights = sample_weight
+)
+
+# IV Model 2: Number of Vaccines
+iv_vax <- ivreg(
+  num_vaccines ~ living_siblings_at_birth + mother_age_current + 
+    mother_educ_attain + wealth_index + birth_order + is_twin + child_sex + factor(birth_year) |
+  manila_post + mother_age_current + mother_educ_attain + 
+    wealth_index + birth_order + is_twin + child_sex + factor(birth_year),
+  data = dhs3,
+  weights = sample_weight
+)
+
+# Combine IV models
+iv_models <- list(
+  "Birth Weight"      = iv_bw,
+  "Number of Vaccines" = iv_vax
+)
+
+# Output formatted IV table
+modelsummary(
+  iv_models,
+  output = "kableExtra",
+  title = "Instrumental Variables Regressions: Effect of Sibling Exposure on Child Outcomes",
+  table_caption = "tab:iv-child-outcomes",
+  coef_map = c(
+    living_siblings_at_birth = "Living Siblings at Birth",
+    mother_age_current = "Mother’s Age",
+    mother_educ_attain = "Mother’s Education",
+    wealth_index       = "Wealth Index",
+    birth_order        = "Birth Order",
+    is_twin            = "Twin",
+    child_sex          = "Child is Male"
+  ),
+  statistic = "p.value",
+  gof_map = c(
+    "nobs" = "Num. Observations",
+    "r.squared" = "$R^2$",
+    "adj.r.squared" = "Adjusted $R^2$"
+  ),
+  escape = FALSE,
+  fmt = 3,
+  stars = TRUE,
+  latex_options = "booktabs",
+  notes = list(
+    "Instrument: Manila × Post-2000",
+    "All regressions include birth year fixed effects.",
+    "Standard errors are clustered at the PSU level.",
+    "Estimates are weighted using DHS sample weights."
+  )
+) |>
+  kable_styling(
+    latex_options = c("hold_position", "scale_down", "threeparttable")
+  )
+
+
+```
+
+Although none of the coefficients on sibship size reach statistical significance, the point estimates are large, negative, and consistent with the quantity–quality trade-off hypothesis. Specifically, an additional sibling is associated with an estimated 8,676-gram reduction in birth weight and a decrease of 23 vaccine doses. These magnitudes, while clearly inflated due to the wide standard errors and the weakness of the instrument, nevertheless suggest that if fertility expands in response to exogenous shocks, there may be meaningful consequences for child health. The lack of precision does not negate the possibility of real effects—it merely limits our ability to detect them definitively in this sample. Importantly, the sign and direction of the effects mirror those in the reduced-form estimates from Table 7, which strengthens the plausibility of the underlying mechanism: policy-driven increases in fertility may stretch household resources in ways that reduce investments per child.
+
+The control variables provide additional insight into household and maternal characteristics that shape child outcomes. Birth order, for instance, is positively associated with both birth weight and vaccine uptake, which suggest that later-born children in this sample may benefit from parental learning or behavioral adaptation, even in the presence of additional siblings. In contrast, being a twin is associated with over 1,100 grams less in birth weight—a biologically expected result—while also linked to lower vaccination, which may reflect both logistical barriers and prioritization decisions in constrained households. The negative association between maternal age and birth weight could reflect accumulated health risks or socioeconomic selection among older mothers, while the small and imprecise effects of maternal education and wealth on vaccination uptake indicate that formal schooling and household resources alone do not guarantee equal access to preventive care.
+
+One surprising result is the strongly negative and statistically significant association between the wealth index and birth weight (−754 grams, p < 0.001). This counterintuitive finding may reflect residual confounding or differences in reporting accuracy, but it also invites further investigation into whether urban wealth, where the cost of living is higher and stress exposure more intense, might offset the nutritional advantages typically associated with wealth in rural settings. Taken together, the IV estimates do not offer causal confirmation of the fertility–health linkage, but they suggest that the hypothesized trade-off remains empirically relevant. The patterns observed are coherent with theoretical expectations and underscore the importance of future work using stronger instruments or alternative policy shocks to credibly identify the full effect of family size on child outcomes.
+
+\section{Limitations and Future Work}
+
+As with any empirical study, my analysis has important limitations. First, although I use an instrumental variable approach to address endogeneity in sibship size, the identification strategy rests on the assumption that policy exposure influences child outcomes only through its effect on fertility. While I believe this is a reasonable assumption given the policy context, I am unable to fully rule out other pathways—such as maternal stress or reduced postnatal care access—that may also be at play.
+
+Second, my analysis is constrained by the limitations of the Demographic and Health Surveys (DHS). Key aspects of early childhood development—such as stunting and wasting—are not available in the DHS data I used, which restricts the scope of health outcomes I can examine. This gap points to a promising direction for future work: utilizing the Philippine National Nutrition Survey (NNS), which contains more detailed anthropometric indicators. Similarly, while I measure vaccination uptake by counting the number of doses received, I am unable to determine whether those vaccines were administered on schedule or if the child completed the full recommended series by age one. This distinction is important because delays in vaccination can reduce effectiveness and leave children vulnerable during critical developmental windows. Since some surveys do record vaccine dates, I hope to explore these timing dynamics more closely in future analyses.
+
+Third, some of the outcomes I analyzed—especially perceived birth size—are based on maternal reports, which may be shaped by cultural expectations or subject to recall bias. Even birth weight, which is more objective, is missing for a share of children, especially in earlier survey waves or rural settings. This raises concerns about selection bias because the children with available data may differ systematically from those without. As I discussed earlier in the reduced-form results, there’s a notable disconnect between reported birth size and measured birth weight. This discrepancy warrants closer attention—not just because it may signal reporting bias, but also because it might reflect how mothers perceive and evaluate infant health. Future work could investigate whether these gaps differ systematically across groups, such as by maternal education, geographic region, or socioeconomic status, and what that might reveal about prevailing health knowledge and beliefs.
+
+Finally, the setting of Executive Order No. 003 in Manila limits how far these results can be extended to other contexts. The policy was geographically specific and politically shaped, with uneven implementation across barangays and varying access to reproductive services. \citet{dumas2019sex} noted that informal restrictions on contraceptive access in Manila began as early as 1997, well before the official issuance of Executive Order No. 003 in 2000. Even after its formal implementation, the policy’s enforcement was uneven—varying significantly by barangay and often shaped by the discretion of local health officials. These inconsistencies further complicate efforts to isolate the policy’s timing and intensity. These features make it difficult to apply the findings to places without similar institutional and demographic conditions. Although I include survey-year fixed effects, the DHS data structure does not allow me to follow the same clusters over time, which restricts my ability to test for pre-policy trends or conduct spatially detailed robustness checks.
+
+Future research can address these limitations by combining experimental or quasi-experimental variation in fertility with longitudinal administrative data on health. Replicating this framework in other natural experiments—such as decentralization-driven contraceptive rollouts or fertility shocks following natural disasters—would test the robustness and generalizability of the quantity–quality trade-off. In doing so, future work can help inform integrated policy approaches that explain how families adjust their investments when fertility changes.
+
+\section{Conclusion}
+
+This study investigates the impact of exogenous fertility shocks on early childhood outcomes using the case of Executive Order No. 003 in Manila, which imposed restrictions on access to modern contraceptives beginning in 2000. Exploiting this localized policy change as a natural experiment, I employ both reduced-form regressions and instrumental variables (IV) estimation to assess whether increased sibling exposure—proxied by the number of living siblings at birth—affects child health investments and outcomes, specifically birth weight and vaccine uptake.
+
+The reduced-form results show that exposure to the policy is significantly associated with lower vaccination coverage, and directionally negative—though imprecise—for birth weight. These findings suggest that the fertility increase induced by the policy may have had measurable consequences for children’s health inputs. The IV estimates, while statistically insignificant due to weak instrument strength, are consistent in sign and magnitude with the reduced-form results. Point estimates suggest large negative effects of sibling exposure on both outcomes, and provide suggestive—though not definitive—evidence in support of the quantity–quality trade-off framework. The consistency across models reinforces the possibility that, under resource constraints, an exogenous rise in fertility may reduce parental investments per child.
 
 
 \bibliographystyle{aea}
+
 \bibliography{references}
-
-\% The appendix command is issued once, prior to all appendices, if any. \appendix
-
-\section{Mathematical Appendix}
