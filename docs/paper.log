@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.8.5)  6 AUG 2025 22:50
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.8.5)  9 AUG 2025 10:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -593,80 +593,75 @@ Overfull \hbox (10.0765pt too wide) in paragraph at lines 1186--1200
 
 [21]
 
-[22] (../data-analysis/outputs/dhs_summary_birth_weight_t.tex)
+[22]
 
-[23] (../data-analysis/outputs/dhs_summary_vaccines_t.tex
-Overfull \hbox (92.06522pt too wide) in paragraph at lines 5--18
- [] 
- []
+[23]
 
-)
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \vbox (badness 3058) has occurred while \output is active []
+
+
 
 [24]
 
-[25]
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[26]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[27]
+[25]
 Underfull \vbox (badness 2189) has occurred while \output is active []
 
 
 
+[26]
+
+[27]
+
 [28]
 
+LaTeX Warning: Reference `tab:reducedform-child-outcomes' on page 29 undefined on input line 1632.
+
+
+
 [29]
-
-LaTeX Warning: Reference `tab:reducedform-child-outcomes' on page 30 undefined on input line 1683.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [30]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[31]
-
-[32]
-Overfull \hbox (5.67096pt too wide) in paragraph at lines 1817--1825
+Overfull \hbox (5.67096pt too wide) in paragraph at lines 1766--1774
 []\TU/lmr/m/n/10.95 Where $[][]$ is the child health outcome for child $\OML/cmm/m/it/10.95 i$ \TU/lmr/m/n/10.95 of mother $\OML/cmm/m/it/10.95 m$\TU/lmr/m/n/10.95 ; $[][]$
  []
 
 
-LaTeX Warning: Reference `tab:iv-child-outcomes' on page 33 undefined on input line 1826.
+LaTeX Warning: Reference `tab:iv-child-outcomes' on page 31 undefined on input line 1775.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
+
+[31]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
+
+[32]
 
 [33]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
+[34] (./paper.bbl
 
-
-[34]
-
-[35] (./paper.bbl
+[35]
 
 [36]
 
 [37]
-
-[38]
-
-[39]
 Underfull \hbox (badness 10000) in paragraph at lines 152--153
 []$[][][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][][][][][] [] [][][] [] [][][][] [] [][] [] [][][][][][][][][][][][] [] [][][][][][][] []
  []
@@ -677,6 +672,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 152--153
  []
 
 
+
+[38]
 Underfull \hbox (badness 4467) in paragraph at lines 161--162
 []\TU/lmr/bx/n/10.95 Philippines Department of Health. \TU/lmr/m/n/10.95 2023. “The National Program
  []
@@ -687,15 +684,13 @@ Overfull \hbox (183.79504pt too wide) in paragraph at lines 161--162
  []
 
 
-
-[40]
 Underfull \hbox (badness 3930) in paragraph at lines 167--168
 [][][] [] [][][][][][][][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] [] [][][]$[]\TU/lmr/m/n/10.95 , Manila,
  []
 
 )
 
-[41] (./paper.aux)
+[39] (./paper.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-20>
@@ -707,12 +702,12 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15411 strings out of 470458
- 288949 string characters out of 5489551
- 692934 words of memory out of 5000000
- 43521 multiletter control sequences out of 15000+600000
+ 15398 strings out of 470458
+ 288296 string characters out of 5489551
+ 694934 words of memory out of 5000000
+ 43515 multiletter control sequences out of 15000+600000
  634056 words of font info for 81 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,12n,79p,760b,1124s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,12n,79p,760b,1116s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on paper.pdf (41 pages).
+Output written on paper.pdf (39 pages).
