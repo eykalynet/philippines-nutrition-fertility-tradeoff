@@ -1,10 +1,51 @@
-# qq-trade-off-natal-investments
+# QQ Trade-Off Natal Investments
 
-**Pre- and Post-Natal Investments and the Quantity–Quality Trade-off**  
-Schupf Fellowship Research Project – Summer 2025
+## Overview
+This repository contains code, documentation, and outputs for the project **"Trade-Offs in Natal Investments"**.  
+The analysis uses harmonized Demographic and Health Survey (DHS) data to examine patterns, determinants, and trade-offs in investments related to natal and early-life health outcomes.
 
-This project investigates how exogenous increases in fertility, driven by restricted access to contraception, affect parental investment in child health outcomes in the Philippines. Using pooled microdata from the 1998, 2003, and 2008 Demographic and Health Surveys (DHS), I analyze the impact of Executive Order No. 003, an anti-contraception policy implemented in Manila in 2000, on fertility patterns and subsequent child nutrition and immunization.
+Due to **DHS Program data use restrictions**, the raw survey data is **not included** in this repository.  
+However, all scripts and processing steps are provided so you can reproduce the results once you obtain access to the required data.
 
-The study employs reduced-form and instrumental variables (IV) strategies to estimate the causal effect of sibship size on early childhood outcomes, including birth weight and vaccine uptake by age five. Findings contribute to the literature on the quantity–quality trade-off by showing that increases in fertility are associated with lower postnatal health investments, particularly in preventive care.
+---
 
-This repository includes scripts for data cleaning, variable harmonization, regression estimation, and figure generation using R.
+## Repository Structure
+- **`data-analysis/`** – Scripts and documentation for cleaning, harmonizing, and analyzing DHS data.
+- **`docs/`** – Supporting documentation, regression tables, and paper-related materials.
+- **`outputs/`** – Generated tables, figures, and results from the analysis (no raw DHS data).
+- **`Salvador_SchupfPoster_25.pdf`** – Research poster summarizing findings.
+
+---
+
+## Accessing the Data
+The DHS Program requires users to request access before downloading datasets.  
+You can request access here:  
+➡ **[DHS Program Data Access Request](https://dhsprogram.com/data/)**
+
+Steps to access:
+1. Create a DHS Program account.
+2. Submit a request specifying the surveys and countries needed.
+3. Wait for approval (typically a few business days).
+4. Download the datasets in your preferred format (Stata, SPSS, SAS).
+
+---
+
+## Reproducing the Analysis
+1. **Request and download** the required DHS datasets.
+2. Place the raw data files in a `raw-data/` folder (not tracked by Git).
+3. Run the scripts in `data-analysis/scripts/` to:
+   - Harmonize variables across surveys.
+   - Clean and prepare the datasets.
+   - Produce outputs in `outputs/`.
+4. Review the outputs and documentation in `docs/`.
+
+---
+
+## License
+This repository is released under the [MIT License](LICENSE).  
+Note: The DHS data itself is **not** covered by this license and remains subject to DHS Program terms of use.
+
+---
+
+**Disclaimer:**  
+The raw DHS data cannot be redistributed. All results in this repository are derived from authorized use of DHS datasets.
